@@ -1,0 +1,771 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,pre,form,fieldset,input,textarea,blockquote,th,td{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+html{
+	height: 100%;
+}
+
+a {
+	color:#003399;
+	text-decoration:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	font-weight: bold;
+	color:#003399;
+	line-height:100%;
+}
+
+h1{
+	font-size: 25px;
+}
+h2{
+	font-size: 20px;
+}
+h3{
+	font-size: 17px;
+}
+h4{
+	font-size: 15px;
+}
+h5{
+	font-size: 10px;
+}
+h6{
+	font-size: 12px;
+}
+
+body{
+	
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	line-height: 130%;/*140*/
+	color:#000000;
+	font-size: 13px;
+	width:100%;
+	height:100%;
+	min-width: 600px;
+}
+
+div.wrapper{
+	height:100%;
+	width:100%;
+	margin:auto;
+}
+
+#header{
+	height: 70px;
+	margin: 0px 0px 15px 0px;
+	display:block;
+	width: 1016px;
+	background: #72B1F4;
+	-moz-border-radius-bottomright: 10px;
+  	-webkit-border-bottom-right-radius: 10px;
+ 	-moz-border-radius-topright: 0px;
+  	-webkit-border-top-right-radius: 0px;*/
+/*  	background: -moz-linear-gradient(-90deg,#72B1F4,#ffffff);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#72B1F4), to(#ffffff));
+	/*background: url('http://seagrant.mit.edu/osm/pics/hpbg.png');*/
+}
+
+#logo{ /*this css inspired by http://groups.csail.mit.edu/uid/ */
+   	float: left;
+    height: 455px;/*190*/
+   	width: 127px;
+   	background: #72B1F4;
+   	z-index:1;
+   	padding-top: 5px;
+   	padding-right: 10px;
+  /*	padding: 5px /*30px*/ 4px 0px/*2px*/ 4px;
+    /*	margin-right: 20px;/*25*/
+   /*  margin-left: 0px; /*5px new */
+   /* 	margin-bottom: 0px; /*20px;*/
+	
+	 -moz-border-radius-bottomleft: 40px;
+  	-webkit-border-bottom-left-radius: 40px;
+ 	-moz-border-radius-bottomright: 5px;
+  	-webkit-border-bottom-right-radius: 5px;
+
+   	/*text-shadow: 1px 1px 0px #373737;
+	-moz-box-shadow: 1px 1px 1px #333;
+   	-webkit-box-shadow: 2px 2px 2px #333;
+	background: -moz-linear-gradient(-90deg,#3d7dd9,#1a355d);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3d7dd9), to(#1a355d));*/
+}
+
+#logo h1{
+	font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
+}
+
+#title {
+   position: absolute;
+   top: 5px;
+   bottom: 0px;
+   margin-left: 125px; /*left*/
+   font-size: 27px;
+}
+
+/* Start Navbar CSS */
+
+.navbar {
+	position: absolute;
+	height:27px; 
+	
+}
+
+#navbar ul{
+	text-align:right;
+	padding:0px;
+	list-style-type:none;
+}
+
+#navbar li{
+	float: right;
+	display:block;
+	margin: 0px 2px 0px 0px;
+	padding-left:5px;
+	padding-right:5px;
+}
+#navbar li a {
+	float:right;
+    display:block;
+    position:relative;
+    height:27px;
+	padding-left:5px;	
+	padding-bottom:2px;
+	padding-right:5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right:0px;
+	-moz-border-radius-topleft: 10px;
+   	-moz-border-radius-topright: 0px;
+  	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 0px;
+	-moz-border-radius-bottomleft: 10px;
+   	-moz-border-radius-bottomright: 0px;
+  	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 0px;
+    overflow:hidden;
+	color:#3d7dd9; /*#4a89cc; NOSB Blue #00a096; NOSB Green*/
+	background-color:#f09f29;/*#fdd305;*/
+    text-decoration:none;
+  /*  text-transform:uppercase;*/
+    font-size:11px;
+    font-weight:bold;
+    line-height:27px;
+}
+
+#navbar li a span{ 
+    display:block;
+    float:right;
+    padding:0 10px 0 10px;
+}
+
+span:hover{
+	color:#000000;
+}
+.current span{
+	color:#000000;
+	background-color: #ffd004;
+	-moz-border-radius-topleft: 10px;
+   	-moz-border-radius-topright: 0px;
+  	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 0px;
+	-moz-border-radius-bottomleft: 10px;
+   	-moz-border-radius-bottomright: 0px;
+  	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 0px;
+}
+.current span:hover{
+	color:#000000;
+}
+
+
+/* End Navbar CSS */
+
+#main {
+	position: absolute;
+	left: 114px;
+	padding: 0.5em;
+	min-width: 886px;
+	width: 886px
+	}
+#mainhome {@charset "utf-8";
+/* CSS Document */
+
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,pre,form,fieldset,input,textarea,blockquote,th,td{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+html{
+	height: 100%;
+}
+
+a {
+	color:#003399;
+	text-decoration:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	font-weight: bold;
+	color:#003399;
+	line-height:100%;
+}
+
+h1{
+	font-size: 25px;
+}
+h2{
+	font-size: 20px;
+}
+h3{
+	font-size: 17px;
+}
+h4{
+	font-size: 15px;
+}
+h5{
+	font-size: 10px;
+}
+h6{
+	font-size: 12px;
+}
+
+body{
+	
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	line-height: 130%;/*140*/
+	color:#000000;
+	font-size: 13px;
+	width:100%;
+	height:100%;
+	min-width: 600px;
+}
+
+div.wrapper{
+	height:100%;
+	width:100%;
+	margin:auto;
+}
+
+#header{
+	height: 70px;
+	margin: 0px 0px 15px 0px;
+	display:block;
+	width: 920px;
+	background: #72B1F4;
+	-moz-border-radius-bottomright: 10px;
+  	-webkit-border-bottom-right-radius: 10px;
+ 	-moz-border-radius-topright: 0px;
+  	-webkit-border-top-right-radius: 0px;*/
+/*  	background: -moz-linear-gradient(-90deg,#72B1F4,#ffffff);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#72B1F4), to(#ffffff));
+	/*background: url('http://seagrant.mit.edu/osm/pics/hpbg.png');*/
+}
+
+#logo{ /*this css inspired by http://groups.csail.mit.edu/uid/ */
+   	float: left;
+    height: 455px;/*190*/
+   	width: 127px;
+   	background: #72B1F4;
+   	z-index:1;
+   	padding-top: 5px;
+   	padding-right: 10px;
+  /*	padding: 5px /*30px*/ 4px 0px/*2px*/ 4px;
+    /*	margin-right: 20px;/*25*/
+   /*  margin-left: 0px; /*5px new */
+   /* 	margin-bottom: 0px; /*20px;*/
+	
+	 -moz-border-radius-bottomleft: 40px;
+  	-webkit-border-bottom-left-radius: 40px;
+ 	-moz-border-radius-bottomright: 0px;
+  	-webkit-border-bottom-right-radius: 0px;
+
+   	/*text-shadow: 1px 1px 0px #373737;
+	-moz-box-shadow: 1px 1px 1px #333;
+   	-webkit-box-shadow: 2px 2px 2px #333;
+	background: -moz-linear-gradient(-90deg,#3d7dd9,#1a355d);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3d7dd9), to(#1a355d));*/
+}
+
+#logo h1{
+	font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
+}
+
+#title {
+   position: absolute;
+   top: 5px;
+   bottom: 0px;
+   margin-left: 125px; /*left*/
+   font-size: 27px;
+}
+
+/* Start Navbar CSS */
+
+.navbar {
+	position: absolute;
+	height:27px; 
+	
+}
+
+#navbar ul{
+	text-align:right;
+	padding:0px;
+	list-style-type:none;
+}
+
+#navbar li{
+	float: right;
+	display:block;
+	margin: 0px 2px 0px 0px;
+	padding-left:5px;
+	padding-right:5px;
+}
+#navbar li a {
+	float:right;
+    display:block;
+    position:relative;
+    height:27px;
+	padding-left:5px;	
+	padding-bottom:2px;
+	padding-right:5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right:0px;
+	-moz-border-radius-topleft: 10px;
+   	-moz-border-radius-topright: 0px;
+  	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 0px;
+	-moz-border-radius-bottomleft: 10px;
+   	-moz-border-radius-bottomright: 0px;
+  	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 0px;
+    overflow:hidden;
+	color:#3d7dd9; /*#4a89cc; NOSB Blue #00a096; NOSB Green*/
+	background-color:#f09f29;/*#fdd305;*/
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:13px;
+    font-weight:bold;
+    line-height:27px;
+}
+
+#navbar li a span{ 
+    display:block;
+    float:right;
+    padding:0 10px 0 10px;
+}
+
+span:hover{
+	color:#000000;
+}
+.current span{
+	color:#000000;
+	background-color: #ffd004;
+	-moz-border-radius-topleft: 10px;
+   	-moz-border-radius-topright: 0px;
+  	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 0px;
+	-moz-border-radius-bottomleft: 10px;
+   	-moz-border-radius-bottomright: 0px;
+  	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 0px;
+}
+.current span:hover{
+	color:#000000;
+}
+
+
+/* End Navbar CSS */
+
+#main {
+	position: absolute;
+	left: 114px;
+	padding: 0.5em;
+	min-width: 683px;
+	width: 683px
+	min-height:700px
+	}
+#mainhome {
+	position: absolute;
+	left: 114px;
+	padding: 0.5em;
+	min-width: 683px
+	width: 683px;
+	background: url('http://seagrant.mit.edu/osm/pics/hpbg.png');
+}
+#f {
+	position: absolute;
+	top: 50px;
+	left: 104px;
+	bottom: 0px;
+	border-style:solid;
+	border-bottom-width:15px;
+	border-top-width:15px;
+	border-left-width:50px;
+	border-right-width:50px;
+	border-color:#ffd004;
+	min-width:560px;
+	width: 586px;
+	height: 360px;
+	background: url('http://seagrant.mit.edu/osm/pics/wave.gif');
+	/*float: left;*/
+	padding: 5px; 
+	margin: 10px;
+   	-moz-border-radius-topright: 10px;
+	-webkit-border-top-right-radius: 10px;
+	 -moz-border-radius-topleft: 10px;
+	-webkit-border-top-left-radius: 10px;
+	-moz-border-radius-bottomleft: 20px;
+   	-moz-border-radius-bottomright: 20px;
+  	-webkit-border-bottom-left-radius: 20px;
+	-webkit-border-bottom-right-radius: 20px;
+}
+
+#rightCol{
+	float:right;
+	width:35%; /*28*/
+	margin: 0px 155px 0px 0px;
+}
+
+
+/*#introBox{
+	padding: 10px;
+	border:thin;
+	border-style:solid;
+	z-index:1;
+	-moz-border-radius-bottomleft: 5px;
+  	-webkit-border-bottom-left-radius: 5px;
+ 	-moz-border-radius-bottomright: 40px;
+  	-webkit-border-bottom-right-radius: 40x;
+  	 -moz-border-radius-topright: 5px;
+  	-webkit-border-top-right-radius: 5x;
+  	-moz-border-radius-topleft: 5px;
+  	-webkit-border-top-left-radius: 5x;
+}
+
+#BLB{
+	padding: 45px 70px 10px 0px;
+	opacity:0.1;
+	filter:alpha(opacity=10); /*for IE*/
+/*	z-index:2;
+	position: absolute;
+}*/
+
+.link {
+	text-decoration:underline;
+	color:#0000CC;
+}
+#toggleOpts{
+	cursor: hand; 
+	cursor: pointer;
+}
+
+#chooseGame{
+	text-align:left;
+}
+
+.choiceList {
+	width: 60%;
+	position:relative;
+	padding-left: 10px;
+	margin:0;
+	/*left:35%;*/ 
+	text-align:left;
+}
+
+.button {
+	height: 2em;
+	width: 7em;
+	margin: 0.75em;
+	cursor: hand; 
+	cursor: pointer;
+	background:#f09f29;
+	-moz-border-radius-topleft: 10px;
+   	-moz-border-radius-topright: 10px;
+  	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+   	-moz-border-radius-bottomright: 10px;
+  	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+}
+.button2 {
+	height: 2em;
+	width: 9em;
+	margin: 0.75em;
+	cursor: hand; 
+	cursor: pointer;
+	background:#f09f29;
+	-moz-border-radius-topleft: 10px;
+   	-moz-border-radius-topright: 10px;
+  	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+   	-moz-border-radius-bottomright: 10px;
+  	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	}
+.button2 {
+	height: 2em;
+	width: 9em;
+	margin: 0.75em;
+	cursor: hand; 
+	cursor: pointer;
+	background:#f09f29;
+	-moz-border-radius-topleft: 10px;
+   	-moz-border-radius-topright: 10px;
+  	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+   	-moz-border-radius-bottomright: 10px;
+  	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	}
+/*Start: Rules popup*/
+#popup {
+	z-index: 1;
+	display:none;
+	height: 100%;
+	width: 100%;
+	background: #000000;
+	position: absolute;
+	top: 0;
+	left:0;
+	-moz-opacity:0.75;
+	-khtml-opacity: 0.75;
+	opacity: 0.75;
+	filter:alpha(opacity=75);
+	
+}
+
+#popup_content{
+	padding: 5px;
+}
+
+.padding
+{
+padding:25px 300px;
+}
+
+#window {
+	z-index: 2;
+	display:none;
+	width: 60%;
+	margin: 0 auto;
+	border: 1px solid #000000;
+	background: #ffffff;
+	position:absolute;
+	top: 7%;
+	left: 15%;
+}
+
+#closePopup {
+	text-align:right;
+}
+
+#footer{
+	vertical-align:bottom;
+}
+/*End: Rules popup*/
+
+.bold{
+	font-weight:bold;
+	font-size: 15px;
+}
+	position: absolute;
+	left: 115px;
+	padding: 0.5em;
+	min-width: 683px
+	width: 800px;
+	background: url('http://seagrant.mit.edu/osm/pics/hpbg.png');
+}
+#gameplay {
+	position: absolute;
+	top: 50px;
+	left: 104px;
+	bottom: 0px;
+	border-style:solid;
+	border-bottom-width:15px;
+	border-top-width:15px;
+	border-left-width:50px;
+	border-right-width:50px;
+	border-color:#ffd004;
+	min-width:790px;
+	width: 790px;
+	height: 380px;
+	background: url('http://seagrant.mit.edu/osm/pics/wave.gif');
+	/*float: left;*/
+	padding: 5px; 
+	margin: 10px;
+   	-moz-border-radius-topright: 10px;
+	-webkit-border-top-right-radius: 10px;
+	 -moz-border-radius-topleft: 10px;
+	-webkit-border-top-left-radius: 10px;
+	-moz-border-radius-bottomleft: 20px;
+   	-moz-border-radius-bottomright: 20px;
+  	-webkit-border-bottom-left-radius: 20px;
+	-webkit-border-bottom-right-radius: 20px;
+}
+
+#rightCol{
+	float:right;
+	width:35%; /*28*/
+	margin: 0px 155px 0px 0px;
+}
+
+
+/*#introBox{
+	padding: 10px;
+	border:thin;
+	border-style:solid;
+	z-index:1;
+	-moz-border-radius-bottomleft: 5px;
+  	-webkit-border-bottom-left-radius: 5px;
+ 	-moz-border-radius-bottomright: 40px;
+  	-webkit-border-bottom-right-radius: 40x;
+  	 -moz-border-radius-topright: 5px;
+  	-webkit-border-top-right-radius: 5x;
+  	-moz-border-radius-topleft: 5px;
+  	-webkit-border-top-left-radius: 5x;
+}
+
+#BLB{
+	padding: 45px 70px 10px 0px;
+	opacity:0.1;
+	filter:alpha(opacity=10); /*for IE*/
+/*	z-index:2;
+	position: absolute;
+}*/
+
+.link {
+	text-decoration:underline;
+	color:#0000CC;
+}
+#toggleOpts{
+	cursor: hand; 
+	cursor: pointer;
+	padding-left: 10px;
+}
+#displayRules{
+	cursor: hand; 
+	cursor: pointer;
+	padding-left: 10px;
+}
+#start{
+	cursor: hand; 
+	cursor: pointer;
+}
+
+#chooseGame{
+	text-align:left;
+}
+
+.choiceList {
+	width: 60%;
+	position:relative;
+	padding-left: 10px;
+	margin:0;
+	/*left:35%;*/ 
+	text-align:left;
+}
+
+.button {
+	height: 2em;
+	width: 7em;
+	margin: 0.75em;
+	cursor: hand; 
+	cursor: pointer;
+	background:#f09f29;
+	-moz-border-radius-topleft: 10px;
+   	-moz-border-radius-topright: 10px;
+  	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+   	-moz-border-radius-bottomright: 10px;
+  	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+}
+
+/*Start: Rules popup*/
+#popup {
+	z-index: 1;
+	display:none;
+	height: 100%;
+	width: 100%;
+	background: #000000;
+	position: absolute;
+	top: 0;
+	left:0;
+	-moz-opacity:0.75;
+	-khtml-opacity: 0.75;
+	opacity: 0.75;
+	filter:alpha(opacity=75);
+	
+}
+
+#popup_content{
+	padding: 5px;
+}
+
+.padding
+{
+padding:25px 300px;
+}
+
+#window {
+	z-index: 2;
+	display:none;
+	width: 60%;
+	margin: 0 auto;
+	border: 1px solid #000000;
+	background: #ffffff;
+	position:absolute;
+	top: 7%;
+	left: 15%;
+}
+
+#closePopup {
+	text-align:right;
+}
+
+#footer{
+	vertical-align:bottom;
+}
+/*End: Rules popup*/
+
+.bold{
+	font-weight:bold;
+	font-size: 15px;
+}

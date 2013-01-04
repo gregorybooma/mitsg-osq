@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+
+#main{
+	width:75%;
+}
+
+td.text{
+	padding: 2px;
+	text-align:right;
+	vertical-align:top;
+}
+
+#region option{
+	background-color:#FFFFCC;
+}
+
+input[type=text]{
+	/*outline-style:thin;
+	outline:solid;*/
+}
+
+.border{
+	border:thin;
+	border-style:solid;
+}
+
+/*#footer{
+	height: 70px;
+}
+*/
+
