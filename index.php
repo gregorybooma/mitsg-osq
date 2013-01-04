@@ -1,6 +1,6 @@
 <?php 
- 	session_start();
- 	session_unset();
+    session_start();
+    session_unset();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,21 +18,21 @@
 
 <div class="wrapper">
 <div id="header">
-	<div id="logo">
-	<center><a href="http://nosb.org" target="blank"><img src="pics/NOSB_old.jpg" alt="NOSB logo background"/></a><br/></center>
-		<ul id="navbar">
-    	<li class="current"><a href="index.php"><span>Play</span></a></li>
-    	<li><a href="submitQ.php"><span>Write Questions</span></a></li>
-    	<li><a href="contest.html"><span>Contest</span></a></li>
-    	<li><a href="about.html"><span>About</span></a></li>
-      	<li><a href="rules.html"><span>Rules</span></a></li>
-      	<li><a href="contact.php"><span>Contact</span></a></li>
-	</ul><br/><p>
-	<center><br/><a href="http://seagrant.mit.edu/" target="blank"><img src="pics/sp.png" alt="MIT Sea Grant Logo"/></a></center><br/>
-	<!--<br/><center><img src="pics/stock3.jpg" alt="cuttlefish"/></center>-->
-	</div>
-	
-	
+    <div id="logo">
+    <center><a href="http://nosb.org" target="blank"><img src="pics/NOSB_old.jpg" alt="NOSB logo background"/></a><br/></center>
+        <ul id="navbar">
+        <li class="current"><a href="index.php"><span>Play</span></a></li>
+        <li><a href="submitQ.php"><span>Write Questions</span></a></li>
+        <li><a href="contest.html"><span>Contest</span></a></li>
+        <li><a href="about.html"><span>About</span></a></li>
+        <li><a href="rules.html"><span>Rules</span></a></li>
+        <li><a href="contact.php"><span>Contact</span></a></li>
+    </ul><br/><p>
+    <center><br/><a href="http://seagrant.mit.edu/" target="blank"><img src="pics/sp.png" alt="MIT Sea Grant Logo"/></a></center><br/>
+    <!--<br/><center><img src="pics/stock3.jpg" alt="cuttlefish"/></center>-->
+    </div>
+    
+    
     <h1 id="title"><center>Ocean Sciences Quiz</center></h1>
     
 
@@ -40,7 +40,7 @@
 
 <!--popup for Rules-->
 <div id="window">
-	<div id="popup_content">
+    <div id="popup_content">
         <div id="sp_rules">
         <h3 style="text-decoration:underline">Rules: Single-Player Mode</h3>
         <h4>Single-Player Controls:</h4>
@@ -53,7 +53,7 @@
         <p>Then, click on the on-screen buttons to submit the answer and move on to the next question, or hit the the "enter" key on the keyboard to submit a response, and then hit "enter" again to move on to the next question.
         <h4>Time limit: </h4>6 minutes per game. The timer starts counting as soon as the next page loads, and does not pause between questions. You can, however, manually pause to take a break.</p>
         <h4>Question format:</h4>
-       	Multiple choice.<p>
+        Multiple choice.<p>
         <h5>See the <a href="rules.html" style="text-decoration:underline" target="_blank">Rules</a> for more details.</h5>
         </div>
         <div id="mp_rules">
@@ -65,23 +65,23 @@
 
 
 <form id="chooseGame" action="chooseGame.php" method="post">
-  		<div id="gameplay">
-  		<h3>&nbsp;&nbsp;Select Gameplay</h3>
+    <div id="gameplay">
+        <h3>&nbsp;&nbsp;Select Gameplay</h3>
         <div class="choiceList">
-    	<input type="radio" name="playerNum" value="single" checked="checked"/> Single-player
-        <input type="radio" name="playerNum" value="multi" /> Two-player        
+            <input type="radio" name="playerNum" value="single" checked="checked"/> Single-player
+            <input type="radio" name="playerNum" value="multi" /> Two-player on your computer
+            <input type="radio" name="playerNum" value="online" /> Two-player online
         </div>
         <p/>
         <input id="toggleOpts" class="button2" type="button2" value="Choose Game Topics" /><p/>
         <input id="displayRules" class="button2" type="button2" value="Display Rules"/>
         <p/>
         <input id="start" class="button" type="submit" value="Start Game" />
-<br/><br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="contest.html"><img src="http://seagrant.mit.edu/osm/pics/cutfish.png" alt="contest message"/></a>
-  
-</div>
+        <br/><br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="contest.html"><img src="http://seagrant.mit.edu/osm/pics/cutfish.png" alt="contest message"/></a>
+    </div>
 
-<div id="rightCol">
-<div class="categories">
+    <div id="rightCol">
+        <div class="categories">
             <h4 class="toggleVisible">Question Categories</h4>
             <div class="choiceList">
             <input class="toggleVisible" type="checkbox" name="category[]" value="Biology" checked="checked" /> <b>Biology</b> <br/>
@@ -99,13 +99,13 @@
           <br/><B> Press "Start Game"<br/>
           when done.</b>
           <br/>
-    </div>
-</div>    
-    </form>
+        </div>
+    </div>    
+</form>
    <div id="BLB" style="pointer-events: none;">
-     <!--   	<img src="pics/NOSB_big.jpg" alt="NOSB logo background"/>  -->
-	</div>
-	
+     <!--       <img src="pics/NOSB_big.jpg" alt="NOSB logo background"/>  -->
+    </div>
+    
 
 <!--end Main div--></div>
 <div id="popup"></div>

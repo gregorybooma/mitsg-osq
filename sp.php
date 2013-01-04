@@ -4,7 +4,7 @@
 	ini_set('display_errors',1);
 	error_reporting(E_ALL);
 
-	connectToDB_SG();
+	connectToDB_Local();
 	$allQuestions = fetch_all_questions();
 	//$allQuestions = array_map("htmlentities",$allQuestions);
 	$response = implode("<QUESTION>",$allQuestions);

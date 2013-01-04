@@ -27,4 +27,7 @@ if($_POST['playerNum'] == "single"){
 else if ($_POST['playerNum'] == "multi"){ 
     header("Location: multiplayer.php"); 
 } 
+else if ($_POST['playerNum'] == "online"){ 
+    header("Location: online.php"); 
+} 
 ?>
