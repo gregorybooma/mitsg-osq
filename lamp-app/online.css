@@ -1,0 +1,43 @@
+/* currently duplicated in #gamespace but turned into a class for refactoring */
+.content {
+  position: absolute;
+  top: 50px;
+  left: 104px;
+  bottom: 0px;
+  border-style:solid;
+  border-bottom-width:15px;
+  border-top-width:15px;
+  border-left-width:50px;
+  border-right-width:50px;
+  border-color:#ffd004;
+  min-width:790px;
+  width: 790px;
+  height: 360px;
+  background: url('http://seagrant.mit.edu/osm/pics/wave2.gif');
+  /*float: left;*/
+  padding: 5px; 
+  margin: 10px;
+  -moz-border-radius-topright: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-radius-bottomleft: 20px;
+  -moz-border-radius-bottomright: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  -webkit-border-bottom-right-radius: 20px;
+}
+
+#gamespace {
+  display: none;
+}
+
+#buzzer {
+  float: right;
+  position: absolute;
+  left: 510px;
+  display: none;
+}
+
+#buzzer img {
+  vertical-align: middle;
+}

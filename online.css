@@ -1,9 +1,0 @@
-#buzzer {
-  float: right;
-  position: absolute;
-  left: 510px;
-}
-
-#buzzer img {
-  vertical-align: middle;
-}
