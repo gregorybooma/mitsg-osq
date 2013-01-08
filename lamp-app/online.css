@@ -31,7 +31,7 @@
   display: none;
 }
 
-#buzzer {
+.status {
   float: right;
   position: absolute;
   left: 510px;

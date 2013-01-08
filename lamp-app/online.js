@@ -53,248 +53,9 @@ $(document).ready(function() {
 	var questionTimes = [];
 	var questionTimesP2 = [];
 	var questionStart;
-	
-	readAllQuestions();
-	
-	function startQuestion(){
-		questionStart = timeElapsed;	
-	}
-	
-	function endQuestion(){
-		questionEnd = timeElapsed;
-		var timeForThisQuestion = questionEnd - questionStart;
-		if(playerResponding=="P1") {
-			questionTimes.push(timeForThisQuestion);
-			//questionTimesP2.push('---');
-		} else if(playerResponding=="P2") {
-			//questionTimes.push('---');
-			questionTimesP2.push(timeForThisQuestion);
-		}
-	}
-	
-	function computeAveTime(player){
-		//compute average response time
-		var averageTime = 0;
-		if(player=="P1") {
-			for (var i=0; i<questionTimes.length; i++){
-				averageTime += questionTimes[i];
-			}
-			return Math.round(10.0*averageTime/questionTimes.length)/10;
-		} else if(player=="P2") {
-			for (var i=0; i<questionTimesP2.length; i++){
-				averageTime += questionTimesP2[i];
-			}
-			return Math.round(10.0*averageTime/questionTimesP2.length)/10;
-		}
-	}
-	
-	//gets all the matching questions from the DB (up to 100 questions, see php file)
-	function readAllQuestions(){
-		$.ajax({
-			type:"POST",
-			url:"sp.php",
-			//dataType:"json",
-			data:"allQuestions",
-			success: function(msg) {
-				var allQs = msg.split("<QUESTION>"); //split by question
-				for (var i=0; i<allQs.length; i++){  //split by question item
-					var oneQuestion = allQs[i].split("<QUESTION_ITEM>");
-					catArray[i] = oneQuestion[0];
-					diffArray[i] = oneQuestion[1];
-					ratArray[i] = oneQuestion[2];
-					qArray[i] = oneQuestion[3];
-					var choicesSplit = oneQuestion[4].split("<ANSWER>");
-					wArray[i] = choicesSplit[0];
-					xArray[i] = choicesSplit[1];
-					yArray[i] = choicesSplit[2];
-					zArray[i] = choicesSplit[3];
-					answerArray[i] = oneQuestion[5];
-					answerArrayP2[i] = oneQuestion[5];
-					idArray = oneQuestion[6];
-				}
-				newQuestion(); // show the first question				
-			}
-		});
-	}
-	
-	//gets new Question+choices+answer
-	function newQuestion(){
-		if(questionCount>=qArray.length){
-			alert("Round Over: There are no more questions available for your categories. \nLoading the Game Summary.");
-			endGame();
-		}
-		category = catArray[questionCount];
-		rationale = ratArray[questionCount];
-		difficulty = diffArray[questionCount];
-		question = qArray[questionCount];
-		choices[0]=wArray[questionCount];
-		choices[1]=xArray[questionCount];
-		choices[2]=yArray[questionCount];
-		choices[3]=zArray[questionCount];
-		answer = answerArray[questionCount];
-		questionID = idArray[questionCount];
-		
-		questionCount++;	
-		displayQuestion();	
-	}
-	
-	function displayQuestion(){
-		//display category
-		document.getElementById("category").innerHTML = "Category: "+category;
-		
-		//display question
-		$('#questionHeader').html("Question "+questionCount+":");
-		$('#questionDifficulty').html("Difficulty: " + difficulty);
-		$('#questionText').html(question);
-		
-		//display choices
-		var listChoices = "";
-		for (var i=0; i<choices.length;i++){
-			$(ids[i]).html("<input type='radio' disabled='disabled' name='answer' value='"+i+"'/> " +letters[i]+": "+choices[i]);
-		}
-		//start question timer
-		startQuestion();
-	}
-	
-	//upon submit, reads player's response + checks if correct
-	$('#submitAnswer').click(function(){
-		submitAnswer(playerResponding);
-	});
-	
-	function submitAnswer(pR){
-		//stop question timer
-		endQuestion();
-		//check that an answer if selected
-		var answered = $("input[name=answer]:checked").length;
-		if(answered==1){
-			answered = $("input[name=answer]:checked");
-			answerNum = answered.val().toString();
-			if(playerResponding=="P1") {
-				userAnswers.push(choices[answerNum]);
-				userAnswersP2.push('9');
-			} else if(playerResponding=="P2") {
-				userAnswers.push('9');
-				userAnswersP2.push(choices[answerNum]);
-			}
-			//check if answer is right; do scoring
-			switch (answer){
-				case '0':
-					if (answered.val()=="0"){
-						answerCorrect(playerResponding, '0');
-					} else {
-						answerWrong(playerResponding, answered.val(),'0');
-					}
-					break;
-				case '1':
-					if (answered.val()=="1"){
-						answerCorrect(playerResponding, '1');
-					} else {
-						answerWrong(playerResponding, answered.val(),'1');
-					}
-					break;
-				case '2':
-					if (answered.val()=="2"){
-						answerCorrect(playerResponding, '2');
-					} else {
-						answerWrong(playerResponding, answered.val(),'2');
-					}
-					break;
-				case '3':
-					if (answered.val()=="3"){
-						answerCorrect(playerResponding, '3');
-					} else {
-						answerWrong(playerResponding, answered.val(),'3');
-					}
-					break;
-				case '9':
-					break;
-				default:
-					answerWrong(playerResponding, answered.val(),'');
-			}	
-			
-		} else{
-			return false;
-		}
-	}
-	
-	//STATS
-	function answerCorrect(player,userAns){
-		if(player=="P1") {
-			correct += 1;
-			$("#correct" + player).html("Player Correct: "+correct);
-		} else if(player == "P2") {
-			correctP2 += 1;
-			$("#correct" + player).html("Opponent Correct: "+correctP2);
-		}
-		
-		displayAnswer(userAns, rightIndicator);
-		if(player=="P1") {
-			answeredCorrect.push(questionCount-1); /*record correctly answered Q*/
-		} else if(player=="P2") {
-			answeredCorrectP2.push(questionCount-1); /*record correctly answered Q*/
-		}
-		
-	}
-	
-	function answerWrong(player, userAns, correctAns){
-		if(player=="P1") {
-			wrong += 1;
-			$("#wrong" + player).html("Player  Wrong: "+wrong);
-		} else if(player=="P2") {
-			wrongP2 += 1;
-			$("#wrong" + player).html("Opponent Wrong: "+wrongP2);
-		}
-		displayAnswer(userAns, correctAns);
-		if(playerResponding=="P1") {
-			answeredWrong.push(questionCount-1); /*record incorrectly answered Q*/
-		} else if(playerResponding=="P2") {
-			answeredWrongP2.push(questionCount-1); /*record incorrectly answered Q*/
-		}
-	}
-	
-	function displayAnswer(userAns, correctAns){
-		//change display
-		if (correctAns==rightIndicator){//answer was right
-			$('#'+userAns).addClass("correct");
-		} 
-		else { //answer was wrong
-			$('#'+userAns).addClass("incorrect");
-			$('#'+correctAns).addClass("correct");
-		}
-		
-		//disable submit, enable next Question
-		$('#submitAnswer').attr("disabled","disabled");
-		$('#nextQuestion').removeAttr("disabled"); 
-		
-	}
-	
-	$('#nextQuestion').click(function(){
-		resumeTimer();
-		showNextQuestion();
-	});
-	
-	function showNextQuestion(){
-		newQuestion();
-		$('#nextQuestion').attr("disabled","disabled"); //disable self
-		
-		//$('#submitAnswer').removeAttr("disabled"); //enable submit button, remove color
-		for (id in ids){
-			$(ids[id]).removeClass("correct");
-			$(ids[id]).removeClass("incorrect");
-		}
-		$('#imgP1').attr('src', 'pics/key_q.png');
-		$('#P1').removeClass('hilite1');
-		$('#imgP2').attr('src', 'pics/key_p.png');
-		$('#P2').removeClass('hilite2');
-		playerResponding="";
-	}
-	
-	
-	$("#endGame").click(function() {
-		endGame();
-	});
-	
 
+	var socket = io.connect('http://localhost:7777');
+	
 	function endGame(){
 		//convert arrays to comma-delimited strings
 		var c = catArray.join('XITEMX');
@@ -354,78 +115,118 @@ $(document).ready(function() {
 	
 	//allows using enter button to submit and move on
 	$(document).keyup(function(e){
-		if (e.keyCode == 13){
-			if ($('#nextQuestion').attr("disabled")==true){
-				submitAnswer();
-			}
-			else {
-				showNextQuestion();
-			}
-		} else if(e.keyCode==80) {//Player 2 has buzzed in
-			if(playerResponding=="") {
-				playerResponding = "P2";
-				$('#submitAnswer').removeAttr("disabled");
-				$('#choices :input').attr('disabled', false);
-				$('#imgP2').attr('src', 'pics/key_pActive.png');
-				$('#P2').addClass('hilite2');
-			}
-		} else if(e.keyCode==81) { // Player 1 has buzzed in
-			if(playerResponding=="") {
-				playerResponding = "P1";
-				$('#submitAnswer').removeAttr("disabled");
-				$('#choices :input').attr('disabled', false);
-				$('#imgP1').attr('src', 'pics/key_qActive.png');
-				$('#P1').addClass('hilite1');
-			}
-		} else if(e.keyCode==87) {
+		var key = keyDecode(e);
+		if (key === "q") { // Player has buzzed in
+			socket.emit("buzzer", {});
+		} else if(key === "w") {
 			if($('input[value="0"]').attr('disabled')==false) {
 				$('input[value="0"]').attr('checked','checked');
 			}
-		} else if(e.keyCode==88) {
+		} else if(key === "x") {
 			if($('input[value="1"]').attr('disabled')==false) {
 				$('input[value="1"]').attr('checked','checked');
 			}
-		} else if(e.keyCode==89) {
+		} else if(key === "y") {
 			if($('input[value="2"]').attr('disabled')==false) {
 				$('input[value="2"]').attr('checked','checked');
 			}
-		} else if(e.keyCode==90) {
+		} else if(key === "z") {
 			if($('input[value="3"]').attr('disabled')==false) {
 				$('input[value="3"]').attr('checked','checked');
 			}
 		}
+		$("submitAnswerForm").focus();
+	});
+
+	$("#submitAnswerForm").submit(function(e) {
+		e.preventDefault();
+		socket.emit("answer", {answer:$("#submitAnswerForm").find("input:checked").val()});
 	});
 
 	// Socket IO code
-
-	var socket = io.connect('http://localhost:7777');
-
-  var uid;
-
-  socket.on('conferUid', function(data) {
-    console.log("uid is " + data.uid);
-    uid = data.uid;
-  });
 
   socket.on('beginGame', function(data) {
     $("#lobby").hide();
     $("#gamespace").show();
     $("#buzzer").show();
+    $("#buzzer-label").text("Press Q to buzz in and answer!");
+  });
+
+  socket.on('buzzed', function(data) {
+    if (data.you) {
+    	$("#buzzed").text("You buzzed in! Now submit your answer...");
+  		$('#submitAnswer').removeAttr("disabled");
+			$('#choices :input').attr('disabled', false);
+    }
+    else {
+    	$("#buzzed").text("Your opponent buzzed in! Waiting for their answer...");
+    }
+    $("#buzzer").hide();
+  	$("#buzzed").show();
+  });
+
+  socket.on('wrong', function(data) {
+    if (data.you) {
+    	$("#buzzed").text("You were wrong! Let's see if your opponent gets it...");
+  		$('#submitAnswer').attr("disabled", "disabled");
+			$('#choices :input').attr('disabled', true);
+    }
+    else {
+    	$("#buzzer-label").text("They were wrong! Press Q to buzz in!");
+    	$("#buzzer").show();
+	  	$("#buzzed").hide();
+    }
+  });
+
+  socket.on('correct', function(data) {
+    if (data.you) {
+  		$("#buzzer-label").text("You got it! Next question:");
+    }
+    else {
+    	$("#buzzer-label").text("They got it! Next question:");
+    }
+    $('#submitAnswer').attr("disabled", "disabled");
+		$('#choices :input').attr('disabled', true);
+    $("#buzzer").show();
+  	$("#buzzed").hide();
+  });
+
+  socket.on('updateScore', function(data) {
+    $("#playerCorrect").text("Player Correct: " + data.playerCorrect);
+    $("#playerWrong").text("Player Wrong: " + data.playerWrong);
+    $("#opponentCorrect").text("Opponent Correct: " + data.opponentCorrect);
+    $("#opponentWrong").text("Opponent Wrong: " + data.opponentWrong);
   });
 
   socket.on("pulse", function(data) {
     
+    // Game over
   	if (data.gameOver) {
       endGame();
       return;
     }
 
+    // Deal with disconnected opponent
     if (data.stale) {
       $("#lobby-status").text("Opponent disconnected. Refresh to play again.");
       $("#lobby").show();
       $("#gamespace").hide();
       $("#buzzer").hide();
       return;
+    }
+
+    // Display new question
+    if (data.question && data.question.question_id !== questionID) {
+    	var question = data.question;
+    	questionID = data.question.question_id;
+    	questionCount++;
+			$("#category").html("Category: " + question.category);
+			$('#questionHeader').html("Question "+questionCount+":");
+			$('#questionDifficulty').html("Difficulty: " + question.difficulty);
+			$('#questionText').html(question.question);
+			for (var i=0; i<question.choices.length;i++){
+				$(ids[i]).html("<input type='radio' name='answer' value='"+i+"'/> " +letters[i]+": "+question.choices[i]);
+			}
     }
 
     $("#timer").html("Time: " + data.timeRemaining);

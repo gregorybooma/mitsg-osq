@@ -17,6 +17,7 @@
   <link rel="stylesheet" type="text/css" href="online.css"/>
   <script type="text/javascript" src="jquery-1.5.min.js"></script>
   <script type="text/javascript" src="socket.io.js"></script>
+  <script type="text/javascript" src="keyDecode.js"></script>
   <script type="text/javascript" src="online.js"></script>
 </head>
 
@@ -36,11 +37,12 @@
   <br/><center><img src="pics/sp.png" alt="MIT Sea Grant Logo"/></center><br/><br/>
   </div>
   </div>
-  <div id="buzzer">
-    <span>
-      <img id="imgP1" src="pics/key_q.png" alt="Q"/>
-      Press Q to buzz in and answer!
-    </span>&#160;&#160;&#160;&#160;
+  <div class="status" id="buzzer">
+    <img id="imgP1" src="pics/key_q.png" alt="Q"/>
+    <span id="buzzer-label"></span>
+  </div>
+  <div class="status" id="buzzed">
+    
   </div>
     <h1 id="title">Online Game</h1>
     
@@ -67,30 +69,30 @@
       <h3 id="questionHeader" style="margin-top:20px;margin-bottom:4px;">Question: </h3><p id="questionText" style="color:#000;font-size:16px;font-weight;bold;"></p>
         <h3>Choices:</h3>
         
-        <div style="color:#000;font-size:16px;font-weight;bold;">
-        <ul id="choices">
-          <li id='0'> <input type='radio' name='answer' value='0'/></li><br/>
-            <li id='1'> <input type='radio' name='answer' value='1'/></li><br/>
-            <li id='2'> <input type='radio' name='answer' value='2' /></li><br/>
-            <li id='3'> <input type='radio' name='answer' value='3'/></li>
-        </ul>
-        </div><br/>
-        <button type="button" id="submitAnswer" class="submitBut" value="Submit">Submit</button>
-        <button type="button" id="nextQuestion" class="submitBut" value="Next Question">Next Question</button>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        <form id="submitAnswerForm">
+          <div style="color:#000;font-size:16px;font-weight;bold;">
+          <ul id="choices">
+            <li id='0'> <input type='radio' name='answer' value='0'/></li><br/>
+              <li id='1'> <input type='radio' name='answer' value='1'/></li><br/>
+              <li id='2'> <input type='radio' name='answer' value='2' /></li><br/>
+              <li id='3'> <input type='radio' name='answer' value='3'/></li>
+          </ul>
+          </div><br/>
+          <input type="submit" id="submitAnswer" value="Submit">
+        </form>
         
 
 </div>
 <!--End Column1 --> 
 </div>
 <div id="column2">
-  <h3 id="timer">Time 6:00</h3>
-  <p/><button type="button" id="endGame" class="gameControls">End Game</button>
-    <br/>
+  <h3 id="timer"></h3>
+  <p/>
     <h3 class="stats">Stats</h3>
-    <h4 id="correctP1" class="stats">Player Correct: </h4>
-    <h4 id="wrongP1" class="stats">Player Wrong: </h4>
-    <h4 id="correctP2" class="stats">Opponent Correct: </h4>
-    <h4 id="wrongP2" class="stats">Opponent Wrong: </h4>
+    <h4 id="playerCorrect" class="stats"></h4>
+    <h4 id="playerWrong" class="stats"></h4>
+    <h4 id="opponentCorrect" class="stats"></h4>
+    <h4 id="opponentWrong" class="stats"></h4>
     <!--End Column2--></div>
 
 <!--<div id="footer">
