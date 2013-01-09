@@ -34,7 +34,7 @@ I have been developing with [MAMP](http://www.mamp.info/). You just need to set 
 
 ### Install dependencies
 
-In `node-app`, create node_modules directory if needed, then:
+In `node-app`, create `node_modules` directory if needed, then:
 
     npm install
 

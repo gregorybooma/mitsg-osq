@@ -7,8 +7,8 @@ var moment = require("moment");
 
 app.listen(config.port);
 
-// var GAME_DURATION_MSECS = 6 * 60 * 1000;
-var GAME_DURATION_MSECS = 20 * 1000;
+var GAME_DURATION_MSECS = 6 * 60 * 1000;
+// var GAME_DURATION_MSECS = 20 * 1000;
 
 var questions;
 var lobby = [];
