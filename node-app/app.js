@@ -2,15 +2,13 @@ var _ = require("underscore");
 var request = require('request');
 var app = require('http').createServer();
 var io = require('socket.io').listen(app);
+var config = require("./config.js");
+var moment = require("moment");
 
-// Configuration (todo move to json file)
-var lampPath = "http://localhost:8888";
-var port = 7777;
+app.listen(config.port);
 
-app.listen(port);
-
-var GAME_DURATION_MSECS = 6 * 60 * 1000;
-// var GAME_DURATION_MSECS = 10 * 1000;
+// var GAME_DURATION_MSECS = 6 * 60 * 1000;
+var GAME_DURATION_MSECS = 20 * 1000;
 
 var questions;
 var lobby = [];
@@ -18,7 +16,7 @@ var games = [];
 var gamesBySocketId = {};
 
 // Load all questions
-var questionsPath = lampPath + "/questionsJson.php";
+var questionsPath = config.lampPath + "/questionsJson.php";
 request(questionsPath, function(err, res, body) {
   if (err || res.statusCode !== 200) {
     console.error("Could not load questions from " + questionsPath);
@@ -47,10 +45,17 @@ io.sockets.on('connection', function(socket) {
 
   socket.on("answer", function(data) {
     var game = gamesBySocketId[this.id];
+    var time = (new Date().getTime() - game.questionStartTime) / 1000;
     if (game.state === "buzzed" && game.buzzedPlayerId === this.id) {
-      if (game.question.answer === data.answer) {
-        game.p1.socket.emit("correct", {you: this.id === game.p1.socket.id});
-        game.p2.socket.emit("correct", {you: this.id === game.p2.socket.id});
+      if (game.answer === data.answer) {
+        game.p1.socket.emit("correct", {
+          you: this.id === game.p1.socket.id,
+          time: time
+        });
+        game.p2.socket.emit("correct", {
+          you: this.id === game.p2.socket.id,
+          time: time
+        });
         if (game.p1.socket.id === this.id) game.p1.correct++;
         if (game.p2.socket.id === this.id) game.p2.correct++;
         game.state = "needsQuestion";
@@ -129,22 +134,24 @@ setInterval(function() {
 
     // Calculate new time remaining string
     var msecsRemaining = GAME_DURATION_MSECS - (new Date().getTime() - game.start);
-    if (msecsRemaining < 0) msecsRemaining = 0;
-    var minsRemaining = (msecsRemaining - (msecsRemaining % 60000)) / 60000;
-    var secsRemaining = new String(Math.floor((msecsRemaining % 60000) / 1000));
-    if (secsRemaining.length < 2) secsRemaining = "0" + secsRemaining;
-    pulseData.timeRemaining = minsRemaining + ":" + secsRemaining;
+    pulseData.timeRemaining = moment(msecsRemaining).format("m:ss");
 
-    // Give players a question
+    // Give players a question, without the answer
     if (game.state === "needsQuestion" && questions) {
-      game.question = questions[Math.round(Math.random() * questions.length)];
+      var question = questions[Math.round(Math.random() * questions.length)];
+      game.question = _.clone(question);
+      game.answer = game.question.answer;
+      delete game.question.answer;
+      delete game.question.rationale;
       pulseData.question = game.question;
       game.state = "waitingForBuzzer";
+      game.questionStartTime = new Date().getTime();
     }
 
     // Game over
     if (msecsRemaining < 1) {
       pulseData.gameOver = true;
+      pulseData.gameTime = moment(new Date().getTime() - game.start).format("m:ss");
     }
 
     // Send out updates for this pulse

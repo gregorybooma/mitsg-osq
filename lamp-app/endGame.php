@@ -32,6 +32,7 @@
 		$_SESSION['aveTimePerQuestionP2']=$_POST['aveTimePerQuestionP2'];
 	}
 	$_SESSION['playerCount']=$_POST['playerCount'];
+	$_SESSION['gameType']=$_POST['gameType'];
 	ini_set('display_errors',1);
 	error_reporting(E_ALL);
 	header("Location: gameStats.php");

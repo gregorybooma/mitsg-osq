@@ -1,4 +1,5 @@
 <?php
+  require "config.php";
   session_start();
   if(isset($_SESSION['questionIDs'])){
       unset($_SESSION['questionIDs']);
@@ -19,6 +20,9 @@
   <script type="text/javascript" src="socket.io.js"></script>
   <script type="text/javascript" src="keyDecode.js"></script>
   <script type="text/javascript" src="online.js"></script>
+  <script>
+    window.nodePath = "<?= $NODE_PATH ?>";
+  </script>
 </head>
 
 <body>
@@ -121,6 +125,7 @@
     <input type="text" name="aveTimePerQuestion" id="aveTimePerQuestion" />
     <input type="text" name="aveTimePerQuestionP2" id="aveTimePerQuestionP2" />
     <input type="text" name="playerCount" id="playerCount" />
+    <input type="hidden" name="gameType" value="online"/>
   <input type="submit" id="submitForm"/>
 </form>
 </main><!--new-->

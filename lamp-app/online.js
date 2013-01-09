@@ -6,8 +6,6 @@ $(document).ready(function() {
 	var gameOver = false;
 	var t;
 	var timeElapsed = -1;
-	var questionCount = 0;
-	var questionCountP2 = 0;
 	//Stats
 	var correct = 0;
 	var wrong = 0;
@@ -21,7 +19,7 @@ $(document).ready(function() {
 	var choices = [];
 	var answer;
 	var questionID;
-	var pastQuestions = [];
+	var allQuestionIDs = [];
 	var letters = ["W","X","Y","Z"];
 	var ids = ["#0","#1","#2","#3"];
 	$('#submitAnswer').attr("disabled","disabled");
@@ -42,75 +40,44 @@ $(document).ready(function() {
 	var answerArrayP2 = [];
 	var idArray = [];
 	
-	var answeredCorrect = [];
-	var answeredWrong = [];
+	var answeredCorrect = 0;
+	var answeredWrong = 0;
 	var userAnswers = [];
 	
-	var answeredCorrectP2 = [];
-	var answeredWrongP2 = [];
+	var answeredCorrectP2 = 0;
+	var answeredWrongP2 = 0;
 	var userAnswersP2 = [];
 	
 	var questionTimes = [];
 	var questionTimesP2 = [];
-	var questionStart;
+	var questionStart;questionTimes
 
-	var socket = io.connect('http://localhost:7777');
+	var socket = io.connect(window.nodePath);
 	
-	function endGame(){
-		//convert arrays to comma-delimited strings
-		var c = catArray.join('XITEMX');
-		var r = ratArray.join('XITEMX');
-		var d = diffArray.join('XITEMX');
-		var q = qArray.join('XITEMX');
-		var w = wArray.join('XITEMX');
-		var x = xArray.join('XITEMX');
-		var y = yArray.join('XITEMX');
-		var z = zArray.join('XITEMX');
-		
-		var answer = answerArray.join('XITEMX');
-		var correct = answeredCorrect.join('XITEMX');
-		var wrong = answeredWrong.join('XITEMX');
-		var userAns = userAnswers.join('XITEMX');
-		
-		var answerP2 = answerArrayP2.join('XITEMX');
-		var correctP2 = answeredCorrectP2.join('XITEMX');
-		var wrongP2 = answeredWrongP2.join('XITEMX');
-		var userAnsP2 = userAnswersP2.join('XITEMX');
-		
-		var averageTime = computeAveTime('P1');
-		var averageTimeP2 = computeAveTime('P2');
-		
-		//put array data into form
-		$('#catArray').val(c);
-		$('#ratArray').val(r);
-		$('#diffArray').val(d);
-		$('#qArray').val(q);
-		$('#wArray').val(w);
-		$('#xArray').val(x);
-		$('#yArray').val(y);
-		$('#zArray').val(z);
-		
-		$('#answerArray').val(answer);
-		$('#answeredCorrect').val(correct);
-		$('#answeredWrong').val(wrong);
-		$('#userAnswers').val(userAns);
-		
-		$('#answerArrayP2').val(answerP2);
-		$('#answeredCorrectP2').val(correctP2);
-		$('#answeredWrongP2').val(wrongP2);
-		$('#userAnswersP2').val(userAnsP2);
-		
-		$('#timeElapsed').val(timeElapsed);
-		$('#aveTimePerQuestion').val(averageTime);
-		if(averageTimeP2=="NaN secs") {
-			$('#aveTimePerQuestionP2').val('N/A');
-		} else {
-			$('#aveTimePerQuestionP2').val(averageTimeP2);
+	function avg(arr) {
+		var sum = 0;
+		for (var i = 0; i < arr.length; i++) {
+			sum += arr[i];
 		}
-		$('#playerCount').val('multi');
-		//submit form
-		$('#submitForm').click();
-		
+		if (sum === 0) {
+			return "n/a";
+		}
+		return (Math.round((sum / arr.length) * 1000) / 1000) + " seconds";
+	}
+
+	function endGame(gameTime){
+		window.location = "onlineGameStats.php" +
+											"?playerTime=" + gameTime +
+											"&playerQuestions=" + (answeredCorrect + answeredWrong) +
+		                  "&playerCorrect=" + answeredCorrect +
+		                  "&playerWrong=" + answeredWrong +
+		                  "&playerAve=" + avg(questionTimes) +
+		                  "&opponentTime=" + gameTime +
+		                  "&opponentQuestions=" + (answeredCorrectP2 + answeredWrongP2) +
+		                  "&opponentCorrect=" + answeredCorrectP2 +
+		                  "&opponentWrong=" + answeredWrongP2 +
+		                  "&opponentAve=" + avg(questionTimesP2) +
+		                  "&questionIDs=" + allQuestionIDs.join(",");
 	}
 	
 	//allows using enter button to submit and move on
@@ -170,20 +137,26 @@ $(document).ready(function() {
     	$("#buzzed").text("You were wrong! Let's see if your opponent gets it...");
   		$('#submitAnswer').attr("disabled", "disabled");
 			$('#choices :input').attr('disabled', true);
+			answeredWrong++;
     }
     else {
     	$("#buzzer-label").text("They were wrong! Press Q to buzz in!");
     	$("#buzzer").show();
 	  	$("#buzzed").hide();
+	  	answeredWrongP2++;
     }
   });
 
   socket.on('correct', function(data) {
     if (data.you) {
   		$("#buzzer-label").text("You got it! Next question:");
+  		questionTimes.push(data.time);
+  		answeredCorrect++;
     }
     else {
     	$("#buzzer-label").text("They got it! Next question:");
+    	questionTimesP2.push(data.time);
+    	answeredCorrectP2++;
     }
     $('#submitAnswer').attr("disabled", "disabled");
 		$('#choices :input').attr('disabled', true);
@@ -202,7 +175,7 @@ $(document).ready(function() {
     
     // Game over
   	if (data.gameOver) {
-      endGame();
+      endGame(data.gameTime);
       return;
     }
 
@@ -217,16 +190,17 @@ $(document).ready(function() {
 
     // Display new question
     if (data.question && data.question.question_id !== questionID) {
-    	var question = data.question;
+    	question = data.question;
     	questionID = data.question.question_id;
-    	questionCount++;
+    	allQuestionIDs.push(questionID);
 			$("#category").html("Category: " + question.category);
-			$('#questionHeader').html("Question "+questionCount+":");
+			$('#questionHeader').html("Question " + allQuestionIDs.length + ":");
 			$('#questionDifficulty').html("Difficulty: " + question.difficulty);
 			$('#questionText').html(question.question);
 			for (var i=0; i<question.choices.length;i++){
 				$(ids[i]).html("<input type='radio' name='answer' value='"+i+"'/> " +letters[i]+": "+question.choices[i]);
 			}
+
     }
 
     $("#timer").html("Time: " + data.timeRemaining);

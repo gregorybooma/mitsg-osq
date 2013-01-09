@@ -13,10 +13,15 @@ $allQuestions = build_questions_array();
 $response = json_encode($allQuestions);
 $response = utf8_encode($response);
 echo $response;
-mysql_close();
 
 
 /////////////////////////////////////////////////////////////////
+
+function get_questions($idsArr) {
+  $idsStr = mysql_real_escape_string(implode(",", $idsArr));
+  $r = mysql_query("SELECT * FROM multichoice WHERE PrimaryKey IN ($idsStr)");
+  return process_all_questions($r);
+}
 
 //use: get all questions
 function build_questions_array(){
