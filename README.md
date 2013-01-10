@@ -9,10 +9,14 @@ It is made up of a LAMP app and a Node.js app
 
 ### Create Database
 
+If you are using MAMP and mysql is not in your path, you can run this command:
+
+    sudo ln -s /Applications/MAMP/Library/bin/mysql /usr/local/bin/mysql
+
 Create a database and dump `osm_multichoice.sql` into it.
 
-    echo "create database <dbname>;" | ./mysql -hlocalhost -uroot -p
-    mysql -hlocalhost -uroot -p < osm_multichoice.sql
+    echo "create database <dbname>;" | mysql -hlocalhost -uroot -p
+    mysql -hlocalhost -uroot -p <dbname> < osm_multichoice.sql
 
 Then make sure the database name / credentials are correct in `sp.php`.
 

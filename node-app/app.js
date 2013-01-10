@@ -33,9 +33,10 @@ io.sockets.on('connection', function(socket) {
     socket: socket
   });
 
+  // One of the players buzzed in
   socket.on("buzzer", function(data) {
     var game = gamesBySocketId[this.id];
-    if (game.state === "waitingForBuzzer") {
+    if (game.state === "waitingForBuzzer" && !game.answered[this.id]) {
       game.state = "buzzed";
       game.buzzedPlayerId = this.id;
       game.p1.socket.emit("buzzed", {you: this.id === game.p1.socket.id});
@@ -43,10 +44,15 @@ io.sockets.on('connection', function(socket) {
     }
   });
 
+  // One of the players submitted an answer
   socket.on("answer", function(data) {
     var game = gamesBySocketId[this.id];
     var time = (new Date().getTime() - game.questionStartTime) / 1000;
     if (game.state === "buzzed" && game.buzzedPlayerId === this.id) {
+
+      game.answered[this.id] = true;
+
+      // Answer is correct
       if (game.answer === data.answer) {
         game.p1.socket.emit("correct", {
           you: this.id === game.p1.socket.id,
@@ -60,14 +66,25 @@ io.sockets.on('connection', function(socket) {
         if (game.p2.socket.id === this.id) game.p2.correct++;
         game.state = "needsQuestion";
       }
+
+      // Answer is incorrect
       else {
-        game.p1.socket.emit("wrong", {you: this.id === game.p1.socket.id});
-        game.p2.socket.emit("wrong", {you: this.id === game.p2.socket.id});
+        if (_.size(game.answered) > 1) {
+          game.state = "needsQuestion";
+        }
+        else {
+          game.state = "waitingForBuzzer";
+        }
+        game.p1.socket.emit("wrong",
+          {you: this.id === game.p1.socket.id, state: game.state});
+        game.p2.socket.emit("wrong",
+          {you: this.id === game.p2.socket.id, state: game.state});
         if (game.p1.socket.id === this.id) game.p1.wrong++;
         if (game.p2.socket.id === this.id) game.p2.wrong++;
-        game.state = "waitingForBuzzer";
       }
     }
+
+    // Update scores for both players
     game.p1.socket.emit("updateScore", {
       playerCorrect: game.p1.correct,
       playerWrong: game.p1.wrong,
@@ -82,6 +99,7 @@ io.sockets.on('connection', function(socket) {
     });
   });
 
+  // Clean up games on disconnection
   socket.on('disconnect', function () {
     delete gamesBySocketId[this.id];
   });
@@ -146,6 +164,7 @@ setInterval(function() {
       pulseData.question = game.question;
       game.state = "waitingForBuzzer";
       game.questionStartTime = new Date().getTime();
+      game.answered = {};
     }
 
     // Game over

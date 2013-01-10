@@ -133,17 +133,25 @@ $(document).ready(function() {
   });
 
   socket.on('wrong', function(data) {
-    if (data.you) {
-    	$("#buzzed").text("You were wrong! Let's see if your opponent gets it...");
-  		$('#submitAnswer').attr("disabled", "disabled");
-			$('#choices :input').attr('disabled', true);
-			answeredWrong++;
+    console.log(data.state);
+    if (data.state === "needsQuestion") {
+      $("#buzzer-label").text("You were both wrong! Next question:");
+      $("#buzzer").show();
+      $("#buzzed").hide();
     }
     else {
-    	$("#buzzer-label").text("They were wrong! Press Q to buzz in!");
-    	$("#buzzer").show();
-	  	$("#buzzed").hide();
-	  	answeredWrongP2++;
+      if (data.you) {
+      	$("#buzzed").text("You were wrong! Let's see if your opponent gets it...");
+    		$('#submitAnswer').attr("disabled", "disabled");
+  			$('#choices :input').attr('disabled', true);
+  			answeredWrong++;
+      }
+      else {
+      	$("#buzzer-label").text("They were wrong! Press Q to buzz in!");
+      	$("#buzzer").show();
+  	  	$("#buzzed").hide();
+  	  	answeredWrongP2++;
+      }
     }
   });
 
