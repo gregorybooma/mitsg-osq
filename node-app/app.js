@@ -51,6 +51,12 @@ io.sockets.on('connection', function(socket) {
     if (game.state === "buzzed" && game.buzzedPlayerId === this.id) {
 
       game.answered[this.id] = true;
+      if (this.id == game.p1.socket.id) {
+        game.p1.answers[game.question.question_id] = data.answer;
+      }
+      else {
+        game.p2.answers[game.question.question_id] = data.answer;
+      }
 
       // Answer is correct
       if (game.answer === data.answer) {
@@ -123,6 +129,8 @@ setInterval(function() {
     p2.correct = 0;
     p1.wrong = 0;
     p2.wrong = 0;
+    p1.answers = {};
+    p2.answers = {};
     games.push(game);
     gamesBySocketId[p1.socket.id] = game;
     gamesBySocketId[p2.socket.id] = game;
@@ -167,15 +175,27 @@ setInterval(function() {
       game.answered = {};
     }
 
+    var pulseDataP1 = _.clone(pulseData);
+    var pulseDataP2 = _.clone(pulseData);
+
     // Game over
     if (msecsRemaining < 1) {
-      pulseData.gameOver = true;
-      pulseData.gameTime = moment(new Date().getTime() - game.start).format("m:ss");
+      pulseDataP1.gameOver = true;
+      pulseDataP2.gameOver = true;
+      game.p1.answers;
+      game.p2.answers;
+      pulseDataP1.yourAnswers = game.p1.answers;
+      pulseDataP2.yourAnswers = game.p2.answers;
+      pulseDataP1.theirAnswers = game.p2.answers;
+      pulseDataP2.theirAnswers = game.p1.answers;
+      var gameTime = moment(new Date().getTime() - game.start).format("m:ss");
+      pulseDataP1.gameTime = gameTime;
+      pulseDataP2.gameTime = gameTime;
     }
 
     // Send out updates for this pulse
-    game.p1.socket.emit("pulse", pulseData);
-    game.p2.socket.emit("pulse", pulseData);
+    game.p1.socket.emit("pulse", pulseDataP1);
+    game.p2.socket.emit("pulse", pulseDataP2);
 
   });
 

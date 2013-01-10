@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="submitQ.css"/>
 <link rel="stylesheet" type="text/css" href="stats.css"/>
 <script type="text/javascript" src="jquery-1.5.min.js"></script>
+<script type="text/javascript" src="statCodeShared.js"></script>
 </head>
 
 <body>
@@ -43,7 +44,7 @@
     <tr>
       <td></td>
       <td><h4 class="alignM">Total Time</h4></td>
-      <td><h4 class="alignM">Total Questions</h4></td>
+      <td><h4 class="alignM">Total Questions Answered</h4></td>
       <td><h4 class="alignM">Number Correct</h4></td>
       <td><h4 class="alignM">Number Wrong</h4></td>
       <td><h4 class="alignM">Avg. Response Time</h4></td>
@@ -82,6 +83,8 @@
     $questionIDsStr = htmlspecialchars($_GET["questionIDs"]);
     $questionIDs = explode(",", $questionIDsStr);
     $questions = get_questions($questionIDs);
+    $yourAnswers = explode(",", $_GET["yourAnswers"]);
+    $theirAnswers = explode(",", $_GET["theirAnswers"]);
   ?>
   <h2>All <?= count($questionIDs) ?> Questions from This Game</h2>
     <div id="questionBox">
@@ -93,18 +96,36 @@
             <th><h6>Question</h6></th>
             <th><h6>Answer</h6></th>
       <th><h6>Your Answer</h6></th>
+      <th><h6>Opponent's Answer</h6></th>
        <th><h6>Rate Question</h6></th>
           <?php
+            $i = 0;
             foreach ($questions as $question) {
               $choices = $question["choices"];
               echo "<tr>";
-              echo "<td></td>";
-              echo "<td>" . $question["category"] . "</td>";
-              echo "<td>" . $question["question"] . "</td>";
-              echo "<td>" . $choices[$question["answer"]] . "</td>";
-              echo "<td></td>";
-              echo "<td></td>";
+              echo "<td>" . $question["question_id"] . "</td>";
+              if ($yourAnswers[$i] == $question["answer"]) {
+                echo "<td class='icon'><img src='pics/checkmark.png' alt='Correct'/></td>";
+              }
+              else if ($yourAnswers[$i] == -1) {
+                echo "<td class='icon'>n/a</td>";
+              }
+              else {
+                echo "<td class='icon'><img src='pics/Xmark.png' alt='Wrong'/></td>";
+              }
+              echo "  <td>" . $question["category"] . "</td>";
+              echo "  <td>" . $question["question"] . "</td>";
+              echo "  <td>" . $choices[$question["answer"]] . "</td>";
+              echo "  <td>" . ($yourAnswers[$i] == -1 ? "n/a" : $choices[$yourAnswers[$i]]) . "</td>";
+              echo "  <td>" . ($theirAnswers[$i] == -1 ? "n/a" : $choices[$theirAnswers[$i]]) . "</td>";
+              echo "  <td>";
+              echo "    <img class='rateImg' src='pics/iconThumbsup.png' border='0' align='absmiddle' ";
+              echo           "rel='" . $question["question"] . "' id='$i+'/>";
+              echo "    <img class='rateImg' src='pics/iconThumbsdown.png' border='0' align='absmiddle' ";
+              echo           "rel='" . $question["question"] . "' id='$i-'/>";
+              echo "  </td>";
               echo "</tr>";
+              $i++;
             }
           ?>
         </table>

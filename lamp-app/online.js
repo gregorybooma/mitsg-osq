@@ -65,7 +65,18 @@ $(document).ready(function() {
 		return (Math.round((sum / arr.length) * 1000) / 1000) + " seconds";
 	}
 
-	function endGame(gameTime){
+	function endGame(gameTime, yourAnswers, theirAnswers){
+    var yourAnswersArr = [];
+    var theirAnswersArr = [];
+    var id;
+    allQuestionIDs.sort(function(a, b) {
+      return a - b;
+    });
+    for (var i = 0; i < allQuestionIDs.length; i++) {
+      id = allQuestionIDs[i];
+      yourAnswersArr.push(yourAnswers[id] || -1);
+      theirAnswersArr.push(theirAnswers[id] || -1);
+    }
 		window.location = "onlineGameStats.php" +
 											"?playerTime=" + gameTime +
 											"&playerQuestions=" + (answeredCorrect + answeredWrong) +
@@ -77,7 +88,9 @@ $(document).ready(function() {
 		                  "&opponentCorrect=" + answeredCorrectP2 +
 		                  "&opponentWrong=" + answeredWrongP2 +
 		                  "&opponentAve=" + avg(questionTimesP2) +
-		                  "&questionIDs=" + allQuestionIDs.join(",");
+		                  "&questionIDs=" + allQuestionIDs.join(",") +
+                      "&yourAnswers=" + yourAnswersArr.join(",") +
+                      "&theirAnswers=" + theirAnswersArr.join(",");
 	}
 	
 	//allows using enter button to submit and move on
@@ -133,11 +146,16 @@ $(document).ready(function() {
   });
 
   socket.on('wrong', function(data) {
-    console.log(data.state);
     if (data.state === "needsQuestion") {
       $("#buzzer-label").text("You were both wrong! Next question:");
       $("#buzzer").show();
       $("#buzzed").hide();
+      if (data.you) {
+        answeredWrong++;
+      }
+      else {
+        answeredWrongP2++;
+      }
     }
     else {
       if (data.you) {
@@ -183,7 +201,7 @@ $(document).ready(function() {
     
     // Game over
   	if (data.gameOver) {
-      endGame(data.gameTime);
+      endGame(data.gameTime, data.yourAnswers, data.theirAnswers);
       return;
     }
 
@@ -200,7 +218,7 @@ $(document).ready(function() {
     if (data.question && data.question.question_id !== questionID) {
     	question = data.question;
     	questionID = data.question.question_id;
-    	allQuestionIDs.push(questionID);
+    	allQuestionIDs.push(Number(questionID));
 			$("#category").html("Category: " + question.category);
 			$('#questionHeader').html("Question " + allQuestionIDs.length + ":");
 			$('#questionDifficulty').html("Difficulty: " + question.difficulty);
