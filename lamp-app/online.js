@@ -116,6 +116,11 @@ $(document).ready(function() {
 		$("#submitAnswer").focus();
 	});
 
+  $("#buzzer").live("click", function(e) {
+    e.preventDefault();
+    socket.emit("buzzer", {});
+  });
+
 	$("#submitAnswerForm").submit(function(e) {
 		e.preventDefault();
 		socket.emit("answer", {answer:$("#submitAnswerForm").find("input:checked").val()});
