@@ -113,7 +113,7 @@ $(document).ready(function() {
 				$('input[value="3"]').attr('checked','checked');
 			}
 		}
-		$("submitAnswerForm").focus();
+		$("#submitAnswer").focus();
 	});
 
 	$("#submitAnswerForm").submit(function(e) {
