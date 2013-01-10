@@ -23,8 +23,6 @@ $(document).ready(function() {
 	var letters = ["W","X","Y","Z"];
 	var ids = ["#0","#1","#2","#3"];
 	$('#submitAnswer').attr("disabled","disabled");
-	$('#nextQuestion').attr("disabled","disabled"); //start with nextQ button off
-	$("#continue").attr("disabled","disabled"); //start with Continue button off
 	
 	var playerResponding = "";
 	
@@ -226,7 +224,7 @@ $(document).ready(function() {
 			for (var i=0; i<question.choices.length;i++){
 				$(ids[i]).html("<input type='radio' name='answer' value='"+i+"'/> " +letters[i]+": "+question.choices[i]);
 			}
-
+      $('#choices :input').attr('disabled', true);
     }
 
     $("#timer").html("Time: " + data.timeRemaining);
