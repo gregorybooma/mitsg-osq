@@ -123,6 +123,11 @@ $(document).ready(function() {
     socket.emit("buzzer", {});
   });
 
+  $("#pass").live("click", function(e) {
+    e.preventDefault();
+    socket.emit("pass", {});
+  });
+
 	$("#submitAnswerForm").submit(function(e) {
 		e.preventDefault();
 		socket.emit("answer", {answer:$("#submitAnswerForm").find("input:checked").val()});
@@ -198,6 +203,21 @@ $(document).ready(function() {
 		$('#choices :input').attr('disabled', true);
     $("#buzzer").show();
   	$("#buzzed").hide();
+  });
+
+  socket.on('pass', function(data) {
+    if (data.you && data.state === "needsQuestion") {
+      $("#buzzer-label").text("You pass! Next question...");
+    }
+    else if (data.you && data.state !== "needsQuestion") {
+      $("#buzzer-label").text("You pass! Let's see if your opponent gets it...");
+    }
+    else if (!data.you && data.state === "needsQuestion") {
+      $("#buzzer-label").text("They pass! Next question...");
+    }
+    else {
+      $("#buzzer-label").text("They pass! Press Q to buzz in!");
+    }
   });
 
   socket.on('updateScore', function(data) {

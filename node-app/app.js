@@ -45,6 +45,21 @@ io.sockets.on('connection', function(socket) {
     }
   });
 
+  // One of the players chooses to pass the question
+  socket.on("pass", function(data) {
+    var game = gamesBySocketId[this.id];
+    if (game.state === "waitingForBuzzer" && !game.answered[this.id]) {
+      game.answered[this.id] = true;
+      if (_.size(game.answered) > 1) {
+        game.state = "needsQuestion";
+      }
+      game.p1.socket.emit("pass",
+          {you: this.id === game.p1.socket.id, state: game.state});
+      game.p2.socket.emit("pass",
+          {you: this.id === game.p2.socket.id, state: game.state});
+    }
+  });
+
   // One of the players submitted an answer
   socket.on("answer", function(data) {
     var game = gamesBySocketId[this.id];

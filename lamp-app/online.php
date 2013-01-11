@@ -83,6 +83,7 @@
           </ul>
           </div><br/>
           <input type="submit" id="submitAnswer" value="Submit">
+          <button id="pass">Pass</button>
           <button id="buzzer">Buzz in to answer</button>
         </form>
         
