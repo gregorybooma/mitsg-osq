@@ -7,8 +7,9 @@ var moment = require("moment");
 
 app.listen(config.port);
 
-var GAME_DURATION_MSECS = 6 * 60 * 1000;
+ var GAME_DURATION_MSECS = 6 * 60 * 1000;
 // var GAME_DURATION_MSECS = 20 * 1000;
+var QUESTION_DURATION_MSECS = 30 * 1000;
 
 var questions;
 var lobby = [];
@@ -123,7 +124,8 @@ setInterval(function() {
       p2: p2,
       start: new Date().getTime(),
       stale: false,
-      state: "needsQuestion"
+      state: "needsQuestion",
+      questions: _.shuffle(_.clone(questions))
     };
     p1.correct = 0;
     p2.correct = 0;
@@ -149,6 +151,8 @@ setInterval(function() {
   // Update all ongoing games
   games.forEach(function(game) {
 
+    var i;
+
     // Data sent to clients
     var pulseData = {};
 
@@ -158,14 +162,37 @@ setInterval(function() {
       game.stale = true;
     }
 
-    // Calculate new time remaining string
+    // New time remaining strings
     var msecsRemaining = GAME_DURATION_MSECS - (new Date().getTime() - game.start);
     pulseData.timeRemaining = moment(msecsRemaining).format("m:ss");
 
+    if (game.questionStartTime !== undefined) {
+      var questionMsecs = QUESTION_DURATION_MSECS - (new Date().getTime() - game.questionStartTime);
+      pulseData.questionTimeRemaining = moment(questionMsecs).format("ss");
+    }
+
+    // New question if time's up for this question
+    if (questionMsecs < 1) {
+      var wasBuzzed = game.state === "buzzed";
+      game.state = "outOfTime";
+
+      // If you run out of time while buzzed in, it counts as a wrong answer
+      if (wasBuzzed) {
+        game.p1.socket.emit("wrong",
+          {you: game.buzzedPlayerId === game.p1.socket.id, state: game.state});
+        game.p2.socket.emit("wrong",
+          {you: game.buzzedPlayerId === game.p2.socket.id, state: game.state});
+        if (game.p1.socket.id === game.buzzedPlayerId) game.p1.wrong++;
+        if (game.p2.socket.id === game.buzzedPlayerId) game.p2.wrong++;
+      }
+
+      game.state = "needsQuestion";
+    }
+
     // Give players a question, without the answer
-    if (game.state === "needsQuestion" && questions) {
-      var question = questions[Math.round(Math.random() * questions.length)];
-      game.question = _.clone(question);
+    var outOfQuestions = false;
+    if (game.state === "needsQuestion" && game.questions.length > 0) {
+      game.question = _.clone(game.questions.pop());
       game.answer = game.question.answer;
       delete game.question.answer;
       delete game.question.rationale;
@@ -174,12 +201,15 @@ setInterval(function() {
       game.questionStartTime = new Date().getTime();
       game.answered = {};
     }
+    else if (game.state === "needsQuestion") {
+      outOfQuestions = true;
+    }
 
     var pulseDataP1 = _.clone(pulseData);
     var pulseDataP2 = _.clone(pulseData);
 
     // Game over
-    if (msecsRemaining < 1) {
+    if (msecsRemaining <= 0 || outOfQuestions) {
       pulseDataP1.gameOver = true;
       pulseDataP2.gameOver = true;
       game.p1.answers;

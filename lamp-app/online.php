@@ -92,6 +92,7 @@
 </div>
 <div id="column2">
   <h3 id="timer"></h3>
+  <h3 id="questionTimer"></h3>
   <p/>
     <h3 class="stats">Stats</h3>
     <h4 id="playerCorrect" class="stats"></h4>

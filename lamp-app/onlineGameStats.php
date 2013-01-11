@@ -47,7 +47,8 @@
       <td><h4 class="alignM">Total Questions Answered</h4></td>
       <td><h4 class="alignM">Number Correct</h4></td>
       <td><h4 class="alignM">Number Wrong</h4></td>
-      <td><h4 class="alignM">Avg. Response Time</h4></td>
+      <td><h4 class="alignM">Total Score<br>(correct - wrong)</h4></td>
+      <td><h4 class="alignM">Avg. Response Time<br>(when correct)</h4></td>
     </tr>
     <tr>
       <td><h4>Player</h4></td>
@@ -55,6 +56,7 @@
       <td style="text-align:center"><p id="numQs" class="statTable"><?= htmlspecialchars($_GET["playerQuestions"]) ?></p></td>
       <td style="text-align:center"><p id="numCorrect" class="statTable"><?= htmlspecialchars($_GET["playerCorrect"]) ?></p></td>
       <td style="text-align:center"><p id="numWrong" class="statTable"><?= htmlspecialchars($_GET["playerWrong"]) ?></p></td>
+      <td style="text-align:center"><p id="totalScore" class="statTable"><?= htmlspecialchars($_GET["playerScore"]) ?></p></td>
       <td style="text-align:center"><p id="aveRespT" class="statTable"><?= htmlspecialchars($_GET["playerAve"]) ?></p></td>
     </tr>
     <tr>
@@ -63,6 +65,7 @@
       <td style="text-align:center"><p id="numQsP2" class="statTable"><?= htmlspecialchars($_GET["opponentQuestions"]) ?></p></td>
       <td style="text-align:center"><p id="numCorrectP2" class="statTable"><?= htmlspecialchars($_GET["opponentCorrect"]) ?></p></td>
       <td style="text-align:center"><p id="numWrongP2" class="statTable"><?= htmlspecialchars($_GET["opponentWrong"]) ?></p></td>
+      <td style="text-align:center"><p id="totalScoreP2" class="statTable"><?= htmlspecialchars($_GET["opponentScore"]) ?></p></td>
       <td style="text-align:center"><p id="aveRespTP2" class="statTable"><?= htmlspecialchars($_GET["opponentAve"]) ?></p></td>
     </tr>
     
@@ -103,7 +106,6 @@
             foreach ($questions as $question) {
               $choices = $question["choices"];
               echo "<tr>";
-              echo "<td>" . $question["question_id"] . "</td>";
               if ($yourAnswers[$i] == $question["answer"]) {
                 echo "<td class='icon'><img src='pics/checkmark.png' alt='Correct'/></td>";
               }

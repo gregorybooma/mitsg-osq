@@ -80,11 +80,13 @@ $(document).ready(function() {
 											"&playerQuestions=" + (answeredCorrect + answeredWrong) +
 		                  "&playerCorrect=" + answeredCorrect +
 		                  "&playerWrong=" + answeredWrong +
+                      "&playerScore=" + (answeredCorrect - answeredWrong) +
 		                  "&playerAve=" + avg(questionTimes) +
 		                  "&opponentTime=" + gameTime +
 		                  "&opponentQuestions=" + (answeredCorrectP2 + answeredWrongP2) +
 		                  "&opponentCorrect=" + answeredCorrectP2 +
 		                  "&opponentWrong=" + answeredWrongP2 +
+                      "&opponentScore=" + (answeredCorrectP2 - answeredWrongP2) +
 		                  "&opponentAve=" + avg(questionTimesP2) +
 		                  "&questionIDs=" + allQuestionIDs.join(",") +
                       "&yourAnswers=" + yourAnswersArr.join(",") +
@@ -149,8 +151,13 @@ $(document).ready(function() {
   });
 
   socket.on('wrong', function(data) {
-    if (data.state === "needsQuestion") {
-      $("#buzzer-label").text("You were both wrong! Next question:");
+    if (data.state === "needsQuestion" || data.state === "outOfTime") {
+      if (data.state === "needsQuestion") {
+        $("#buzzer-label").text("You were both wrong! Next question:");
+      }
+      if (data.state === "outOfTime") {
+        $("#buzzer-label").text("Out of time! Next question:");
+      }
       $("#buzzer").show();
       $("#buzzed").hide();
       if (data.you) {
@@ -233,6 +240,9 @@ $(document).ready(function() {
     }
 
     $("#timer").html("Time: " + data.timeRemaining);
+    if (data.questionTimeRemaining) {
+      $("#questionTimer").html("Next question in " + data.questionTimeRemaining);
+    }
   });
 	
 });
