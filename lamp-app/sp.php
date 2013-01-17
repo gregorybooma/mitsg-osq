@@ -86,7 +86,7 @@
 	//Connect to DB
 	function connectToDB_Local(){
 	
-		if (!$con = @mysql_connect("localhost","root","root")){
+		if (!$con = @mysql_connect("localhost","root","")){
 			die('Could not connect: ' . mysql_error());
 		}
 		if (!@mysql_select_db('jesslin+ocean')){
