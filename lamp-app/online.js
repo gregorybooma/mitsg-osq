@@ -140,6 +140,7 @@ $(document).ready(function() {
     $("#gamespace").show();
     $("#buzzer").show();
     $("#buzzer-label").text("Press Q to buzz in and answer!");
+    socket.emit("registerName", {name: window.userName});
   });
 
   socket.on('buzzed', function(data) {

@@ -1,11 +1,16 @@
 <?php
   require "config.php";
   session_start();
+
+  if(!isset($_SESSION['userName'])){
+    header("Location: setUserName.php");
+  }
+
   if(isset($_SESSION['questionIDs'])){
-      unset($_SESSION['questionIDs']);
+    unset($_SESSION['questionIDs']);
   }
   $_SESSION['questionIDs']=array();
-
+  
 ?>
 <!doctype html>
 <html>
@@ -22,6 +27,7 @@
   <script type="text/javascript" src="online.js"></script>
   <script>
     window.nodePath = "<?= $NODE_PATH ?>";
+    window.userName = "<?= $_SESSION['userName'] ?>";
   </script>
 </head>
 

@@ -36,6 +36,18 @@ CREATE TABLE `multichoice` (
 ) ENGINE=MyISAM AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
+DROP TABLE IF EXISTS `leaderboard`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `leaderboard` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(80) NOT NULL,
+  `score` int(10) NOT NULL,
+  `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
 --
 -- Dumping data for table `multichoice`
 --

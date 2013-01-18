@@ -90,6 +90,20 @@ function question_process($r){
   "question_id" => $result["PrimaryKey"]);
 } 
 
+function submit_score($name, $score) {
+  $nameSecure = mysql_real_escape_string($name);
+  $nameSecure = mysql_real_escape_string($score);
+  mysql_query("INSERT INTO leaderboard (name, score)
+               VALUES ('$name', '$score')");
+}
+
+function get_scores() {
+  return mysql_query('SELECT name, score, DATE_FORMAT(timestamp, "%M %D %Y") AS `date`
+                      FROM leaderboard
+                      ORDER BY score DESC
+                      LIMIT 10');
+}
+
 //Connect to DB
 function connectToDB_Local(){
 

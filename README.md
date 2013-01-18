@@ -26,9 +26,13 @@ Near the start of the file you choose which DB setup function to call:
 
 This can be any of `connectToDB_Local`, `connectToDB_Scripts`, or `connectToDB_SG`. Each function has its own host, username, password, and database name.
 
+This function name must also be the same in `questionsJson.php`.
+
 ### Configure
 
 Check over the options in `config.php`
+
+Hosts set to `localhost` are only suitable for local testing.
 
 ### Run
 
@@ -46,8 +50,12 @@ In `node-app`, create `node_modules` directory if needed, then:
 
 Check over the options in `config.js`
 
+Hosts set to `localhost` are only suitable for local testing.
+
 ### Run
 
 In `node-app` run:
 
     node app
+
+The server is running while this command is running. You can use a utility like [forever](https://github.com/nodejitsu/forever) to manage node applications more robustly.

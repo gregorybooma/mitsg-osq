@@ -76,13 +76,39 @@
 
 </div>
 <br/>
+
+<?php
+echo "<!--";
+require("questionsJson.php");
+echo "-->";
+?>
+
+<div style="width:100%">
+  <h2>Leaderboard</h2>
+  <table>
+    <thead>
+      <tr><td>Name</th><td>Score</th><td>Date</th></tr>
+    </thead>
+    <?php
+      $res = get_scores();
+      while($row = mysql_fetch_array($res)){
+        ?>
+        <tr>
+          <td><?= $row["name"] ?></td>
+          <td><?= $row["score"] ?></td>
+          <td><?= $row["date"] ?></td>
+        </tr>
+        <?php
+      }
+    ?>
+  </table>
+</div>
+<br/>
 <div style="width:100%">
   <?php
     // TODO don't have this require always echo out stuff, the
     // comment is a short-term hack
-    echo "<!--";
-    require("questionsJson.php");
-    echo "-->";
+    
     $questionIDsStr = htmlspecialchars($_GET["questionIDs"]);
     $questionIDs = explode(",", $questionIDsStr);
     $questions = get_questions($questionIDs);

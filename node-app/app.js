@@ -4,11 +4,12 @@ var app = require('http').createServer();
 var io = require('socket.io').listen(app);
 var config = require("./config.js");
 var moment = require("moment");
+var async = require("async");
 
 app.listen(config.port);
 
- var GAME_DURATION_MSECS = 6 * 60 * 1000;
-// var GAME_DURATION_MSECS = 20 * 1000;
+ // var GAME_DURATION_MSECS = 6 * 60 * 1000;
+var GAME_DURATION_MSECS = 20 * 1000;
 var QUESTION_DURATION_MSECS = 30 * 1000;
 
 var questions;
@@ -32,6 +33,17 @@ request(questionsPath, function(err, res, body) {
 io.sockets.on('connection', function(socket) {
   lobby.push({
     socket: socket
+  });
+
+  // Player sent their user name for leader board
+  socket.on("registerName", function(data) {
+    var game = gamesBySocketId[this.id];
+    if (this.id === game.p1.socket.id) {
+      game.p1.name = data.name;
+    }
+    else {
+      game.p2.name = data.name;
+    }
   });
 
   // One of the players buzzed in
@@ -224,11 +236,10 @@ setInterval(function() {
     var pulseDataP2 = _.clone(pulseData);
 
     // Game over
-    if (msecsRemaining <= 0 || outOfQuestions) {
+    if ((msecsRemaining <= 0 || outOfQuestions) && !game.over) {
+      game.over = true;
       pulseDataP1.gameOver = true;
       pulseDataP2.gameOver = true;
-      game.p1.answers;
-      game.p2.answers;
       pulseDataP1.yourAnswers = game.p1.answers;
       pulseDataP2.yourAnswers = game.p2.answers;
       pulseDataP1.theirAnswers = game.p2.answers;
@@ -236,11 +247,30 @@ setInterval(function() {
       var gameTime = moment(new Date().getTime() - game.start).format("m:ss");
       pulseDataP1.gameTime = gameTime;
       pulseDataP2.gameTime = gameTime;
-    }
 
-    // Send out updates for this pulse
-    game.p1.socket.emit("pulse", pulseDataP1);
-    game.p2.socket.emit("pulse", pulseDataP2);
+      // Submit scores to leaderboard in parallel
+      async.parallel([
+        function(callback) {
+          considerForLeaderboard(game.p1, callback);
+        },
+        function(callback) {
+          considerForLeaderboard(game.p2, callback);
+        }
+      ], function(err) {
+
+        game.p1.socket.emit("pulse", pulseDataP1);
+        game.p2.socket.emit("pulse", pulseDataP2);
+
+      });
+      
+    }
+    else {
+
+      // Send out updates for this pulse
+      game.p1.socket.emit("pulse", pulseDataP1);
+      game.p2.socket.emit("pulse", pulseDataP2);
+
+    }
 
   });
 
@@ -248,3 +278,30 @@ setInterval(function() {
   games = _.where(games, {stale:false});
 
 }, 1000);
+
+function considerForLeaderboard(p, callback) {
+  var submitScorePath = config.lampPath + "/submitScore.php";
+  request.post({
+    url: submitScorePath,
+    method: "post",
+    form: {
+      name: p.name,
+      score: (p.correct - p.wrong),
+      secret: "L5oDNb1WbSxaFx5PAIJX"
+    }
+  }, function(err, res, body) {
+    if (err || res.statusCode !== 200) {
+      console.error("Could not submit score to " + submitScorePath);
+      console.error("Error " + (err || res.statusCode));
+    }
+    else if (body.match(/^Error/)) {
+      console.log("Error submitting score: " + body);
+    }
+    else {
+      console.log("Submitted score for " + p.name);
+    }
+    callback(null);
+  });
+}
+
+console.log("Server running on port " + config.port + ". ctrl-c to stop");
