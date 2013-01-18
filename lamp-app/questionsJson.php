@@ -8,7 +8,7 @@ session_start();
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
-//connectToDB_Local();
+//connectToDB_Local(); //
 connectToDB_SG();
 $allQuestions = build_questions_array();
 $response = json_encode($allQuestions);
