@@ -1,7 +1,7 @@
 module.exports = {
 
   // Path for LAMP application running the game, including port if appropriate
-  "lampPath": "http://osq.mit.edu:80",
+  "lampPath": "http://osq.mit.edu",
 
   // Port for this Node.js application to run on
   "port": 8080
