@@ -8,8 +8,8 @@ var async = require("async");
 
 app.listen(config.port);
 
- // var GAME_DURATION_MSECS = 6 * 60 * 1000;
-var GAME_DURATION_MSECS = 20 * 1000;
+var GAME_DURATION_MSECS = 6 * 60 * 1000;
+// var GAME_DURATION_MSECS = 20 * 1000;
 var QUESTION_DURATION_MSECS = 30 * 1000;
 
 var questions;
