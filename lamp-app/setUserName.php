@@ -3,7 +3,13 @@
   session_start();
 
   if (isset($_POST['userName'])){
-    $_SESSION['userName'] = $_POST['userName'];
+    if (preg_match("/^\w+$/i", $_POST['userName'])) {
+      $_SESSION['userName'] = $_POST['userName'];
+    }
+    else {
+      echo "User name can only contain letters and numbers.";
+    }
+    
     header("Location: online.php");
   }
 
@@ -29,12 +35,13 @@
     <form method="post" action="setUserName.php">
       <fieldset>
         <legend>Your name is needed for public leaderboards</legend>
-        <input name="userName" id="userName" value="<?= $userName ?>">
+        <input name="userName" id="userName" pattern="^\w+$" value="<?= $userName ?>">
         <label for="userName">Your Name</label>
         <br>
         <input type="submit" value="Confirm Name">
       </fieldset>
     </form>
+
   </div>
 
 </body>
