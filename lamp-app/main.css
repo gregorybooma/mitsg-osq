@@ -82,7 +82,7 @@ div.wrapper{
   	-webkit-border-top-right-radius: 0px;*/
 /*  	background: -moz-linear-gradient(-90deg,#72B1F4,#ffffff);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#72B1F4), to(#ffffff));
-	/*background: url('http://seagrant.mit.edu/osm/pics/hpbg.png');*/
+	/*background: url('http://seagrant.mit.edu/osm/lamp-app/pics/hpbg.png');*/
 }
 
 #logo{ /*this css inspired by http://groups.csail.mit.edu/uid/ */
@@ -291,7 +291,7 @@ div.wrapper{
   	-webkit-border-top-right-radius: 0px;*/
 /*  	background: -moz-linear-gradient(-90deg,#72B1F4,#ffffff);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#72B1F4), to(#ffffff));
-	/*background: url('http://seagrant.mit.edu/osm/pics/hpbg.png');*/
+	/*background: url('http://seagrant.mit.edu/osm/lamp-app/pics/hpbg.png');*/
 }
 
 #logo{ /*this css inspired by http://groups.csail.mit.edu/uid/ */
@@ -423,7 +423,7 @@ span:hover{
 	padding: 0.5em;
 	min-width: 683px
 	width: 683px;
-	background: url('http://seagrant.mit.edu/osm/pics/hpbg.png');
+	background: url('http://seagrant.mit.edu/osm/lamp-app/pics/hpbg.png');
 }
 #f {
 	position: absolute;
@@ -439,7 +439,7 @@ span:hover{
 	min-width:560px;
 	width: 586px;
 	height: 360px;
-	background: url('http://seagrant.mit.edu/osm/pics/wave.gif');
+	background: url('http://seagrant.mit.edu/osm/lamp-app/pics/wave.gif');
 	/*float: left;*/
 	padding: 5px; 
 	margin: 10px;
@@ -609,7 +609,7 @@ padding:25px 300px;
 	padding: 0.5em;
 	min-width: 683px
 	width: 800px;
-	background: url('http://seagrant.mit.edu/osm/pics/hpbg.png');
+	background: url('http://seagrant.mit.edu/osm/lamp-app/pics/hpbg.png');
 }
 #gameplay {
 	position: absolute;
@@ -625,7 +625,7 @@ padding:25px 300px;
 	min-width:790px;
 	width: 790px;
 	height: 380px;
-	background: url('http://seagrant.mit.edu/osm/pics/wave.gif');
+	background: url('http://seagrant.mit.edu/osm/lamp-app/pics/wave.gif');
 	/*float: left;*/
 	padding: 5px; 
 	margin: 10px;
