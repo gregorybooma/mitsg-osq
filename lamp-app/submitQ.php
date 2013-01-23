@@ -176,7 +176,7 @@ $(document).ready(function(){
             </tr>
             <tr></tr>
         	<tr>
-            	<td>Answer: </td> 
+            	<td>Correct Answer: </td> 
                 <td>
                 	<select id="answer" name="answer">
 						<option value="none"></option>
