@@ -21,7 +21,7 @@ session_start();
 
 
 function sendMail(){
-	$to = 'seagrant-ed@mit.edu, NOSB@oceanleadership.org';
+	$to = 'seagrant-ed@mit.edu, booma@mit.edu, NOSB@oceanleadership.org';
 	$subject = "OSQ: New Question Submission";
 	//define the message to be sent. Each line should be separated with \n
 	$firstname = $_POST['firstname'];
