@@ -155,7 +155,7 @@ $(document).ready(function(){
                 <td class="border"><textarea name="question" id="question" rows="3" cols="50"></textarea></td>
             </tr>
             <tr>
-            	<td>Choices:</td>
+            	<td>Answer Choices:</td>
                 <td></td>
             </tr>
             <tr>
