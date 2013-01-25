@@ -40,6 +40,7 @@
 
 <!--popup for Rules-->
 <div id="window">
+    <a href="#" id="closePopup">[close]</a>
     <div id="popup_content">
         <div id="sp_rules">
         <h3 style="text-decoration:underline">Rules: Single-Player Mode</h3>

@@ -363,7 +363,8 @@ padding:25px 300px;
 }
 
 #closePopup {
-	text-align:right;
+	float: right;
+  padding: 1em;
 }
 
 #footer{
@@ -513,10 +514,6 @@ padding:25px 300px;
 	position:absolute;
 	top: 7%;
 	left: 15%;
-}
-
-#closePopup {
-	text-align:right;
 }
 
 #footer{

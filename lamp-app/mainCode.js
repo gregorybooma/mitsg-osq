@@ -45,7 +45,8 @@ $(document).ready(function(){
 		$('#popup').fadeIn('fast');
 		$('#window').fadeIn('fast');
 	}
-	$('#closePopup').click(function() {
+	$('#closePopup').click(function(e) {
+		e.preventDefault();
 		Close_Popup();
 	});
 	function Close_Popup() {
