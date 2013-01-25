@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 // Intended to replace the awkward proprietary format in sp.php
 // with JSON
@@ -8,7 +8,7 @@ session_start();
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
-//connectToDB_Local(); //
+// connectToDB_Local(); //
 connectToDB_SG();
 $allQuestions = build_questions_array();
 $response = json_encode($allQuestions);
@@ -102,6 +102,15 @@ function get_scores() {
                       FROM leaderboard
                       ORDER BY score DESC
                       LIMIT 10');
+}
+
+function get_player_total($name) {
+  $nameSecure = mysql_real_escape_string($name);
+  return mysql_query("SELECT name, SUM(score) AS `total`
+                      FROM leaderboard
+                      WHERE name='$nameSecure'
+                      AND timestamp >= now() - INTERVAL 1 DAY
+                      GROUP BY name");
 }
 
 //Connect to DB

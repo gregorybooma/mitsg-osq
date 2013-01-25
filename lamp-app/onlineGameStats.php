@@ -84,16 +84,30 @@ echo "-->";
 ?>
 
 <div style="width:100%">
+
+  <h2>Your total score today</h2>
+
+  <div id="lifetimeScore">
+    <?php
+    $row = mysql_fetch_array(get_player_total($_SESSION['userName']));
+    echo $row["total"];
+    echo " points";
+    ?>
+  </div>
+
   <h2>Leaderboard</h2>
   <table>
     <thead>
-      <tr><td>Name</th><td>Score</th><td>Date</th></tr>
+      <tr><td>Rank</th><td>Name</th><td>Score</th><td>Date</th></tr>
     </thead>
     <?php
       $res = get_scores();
+      $rank = 0;
       while($row = mysql_fetch_array($res)){
+        $rank++;
         ?>
         <tr>
+          <td><?= $rank ?></td>
           <td><?= $row["name"] ?></td>
           <td><?= $row["score"] ?></td>
           <td><?= $row["date"] ?></td>
