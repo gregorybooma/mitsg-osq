@@ -34,7 +34,7 @@ $(document).ready(function(){
 	<ul id="navbar">
     	<li><a href="index.php"><span>Play</span></a></li>
     	<li><a href="submitQ.php"><span>Write Questions</span></a></li>
-    	<li><a href="contest.html"><span>Contest</span></a></li>
+    	<!-- <li><a href="contest.html"><span>Contest</span></a></li> -->
     	<li><a href="about.html"><span>About</span></a></li>
       	<li><a href="rules.html"><span>Rules</span></a></li>
       	<li class="current"><a href="contact.php"><span>Contact</span></a></li>
