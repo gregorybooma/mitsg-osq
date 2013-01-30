@@ -34,7 +34,8 @@
   <div>
     <form method="post" action="setUserName.php">
       <fieldset>
-        <legend>Your name is needed for public leaderboards</legend>
+        <legend>Your name is needed for the public leaderboard</legend>
+        <p>Enter a screen name to identify yourself on the leaderboard. Leaders are ranked by cumulative daily score. Results are shown at the end of each game.<p>
         <input name="userName" id="userName" pattern="^\w+$" value="<?= $userName ?>">
         <label for="userName">Your Name</label>
         <br>
