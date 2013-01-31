@@ -105,6 +105,7 @@
 		}
 	}
 	
+//probably can delete above functions -- just add user and pass below...
 	function connectToDB_SG(){
 		if (!$con = @mysql_connect("localhost","","")){
 			die('Could not connect: ' . mysql_error());

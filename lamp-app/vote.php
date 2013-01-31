@@ -29,6 +29,7 @@
 		}
 	}
 	
+//probably can delete above functions -- just add user and pass below...
 connectToDB_SG();
 $q="select * from multichoice where Question='" . $_POST["Question"] . "'";
 $r = mysql_query($q) or die(mysql_error());
