@@ -43,19 +43,72 @@
     <a href="#" id="closePopup">[close]</a>
     <div id="popup_content">
         <div id="sp_rules">
-        <h3 style="text-decoration:underline">Rules: Single-Player Mode</h3>
-        <h4>Single-Player Controls:</h4>
-        Use your mouse to select your answer choice, or buzz in with the key that corresponds to your answer choice (W, X, Y, or Z). 
-        <p>Then, click on the on-screen buttons to submit your answer and move on to the next question, or hit the the "enter" key on your keyboard to submit a response, and then hit "enter" again to move on to the next question.
-        <h4>Two-Player Controls:</h4>
-        <b>Player 1</b> can buzz in using the Q key on the keyboard. 
-        <p><b>Player 2</b> can buzz in using the P key on the keyboard. 
-        <p> The active player button will light up to indiciate which player buzzed in first. Use the mouse to select the desired answer choice, or buzz in with the key that corresponds to the answer choice (W, X, Y, or Z). 
-        <p>Then, click on the on-screen buttons to submit the answer and move on to the next question, or hit the the "enter" key on the keyboard to submit a response, and then hit "enter" again to move on to the next question.
-        <h4>Time limit: </h4>6 minutes per game. The timer starts counting as soon as the next page loads, and does not pause between questions. You can, however, manually pause to take a break.</p>
-        <h4>Question format:</h4>
-        Multiple choice.<p>
-        <h5>See the <a href="rules.html" style="text-decoration:underline" target="_blank">Rules</a> for more details.</h5>
+        <h3 style="text-decoration:underline">Rules: </h3>
+			<h3>Single-Player Mode</h3>
+			<p>The single-player mode allows you to quiz yourself. </p>
+			<table>
+			<tr>
+					<td class="title">Single-Player Controls: </td>
+					<td>Use your mouse to select your answer choice, or buzz in with the key that corresponds to your answer choice (W, X, Y, or Z). 
+					<p>Then, click on the on-screen buttons to submit your answer and move on to the next question, or hit the the "enter" key on your keyboard to submit a response, and then hit "enter" again to move on to the next question.</td>
+			 </tr>
+			 </table>
+			<h3>Two-Player Mode</h3>
+			<p>The Two-player mode allows you to play against an opponent, on one computer.</p>
+			<table>
+			 <tr>
+					<td class="title">Two-Player Controls: </td>
+					<td><b>Player 1</b> can buzz in using the Q key on the keyboard. 
+					<p><b>Player 2</b> can buzz in using the P key on the keyboard. 
+					<p> The active player button will light up to indiciate which player buzzed in first. Use the mouse to select the desired answer choice, or buzz in with the key that corresponds to the answer choice (W, X, Y, or Z). 
+					<p>Then, click on the on-screen buttons to submit the answer and move on to the next question, or hit the the "enter" key on the keyboard to submit a response, and then hit "enter" again to move on to the next question.</td>
+			 </tr>
+			  <tr>
+					<td class="title">Choose Game Topics: </td>
+					<td>Click on the "Choose Game Topics" text on the main "Play" page to select the subject matter for the round of play. Note that the questions in the OSQ are limited--if you select too few subjects, the round may be cut short. </td>
+				</tr>
+				<tr>
+					<td class="title">Time limit: </td>
+					<td>6 minutes per game. The timer starts counting as soon as the next page loads, and does not pause between questions. You can, however, manually pause to take a break.</td>
+				</tr>
+				<tr>
+					<td class="title">Question format: </td>
+					<td>Multiple choice.</td>
+				</tr>
+				<tr>
+					<td class="title">Feedback: </td>
+					<td><span class="green">Correct answers</span> will be <span class="green">large, green and bold</span>; <span class="red">incorrect answers</span> will be marked <span class="red">red</span>.</td>
+				</tr>
+				<tr>
+					<td class="title">Ending the game: </td>
+					<td>The match will end after 6 minutes have passed, or after you've exhausted our question database. You can also end a match at any time by hitting the "End Game" button in the bottom right.  Clicking on one of the tabs or navigating to a new window at the top of the page will also end a match, but you will not receive game statistics.</td>
+				</tr>
+			</table>
+			<br/>
+	
+			<h3>Two-player Online Mode</h3>
+			<p>The Two-player Online mode allows you to play against an opponent via the internet. Currently, you cannot choose your opponent. Competitors are matched on a first-come, first-served basis.</p>
+			<table>
+			 <tr>
+					<td class="title">Two-player Online Controls: </td>
+					<td>Players can buzz-in either by using the Q key on the keyboard, or clicking the "Buzz-in to answer" button. Players may also click the "Pass" button to pass.
+					<p> A message will appear indicating which player buzzed-in first. That player can use the mouse to select the button corresponding to the desired answer choice, or with the key that corresponds to the answer choice (W, X, Y, or Z). 
+					<p> The player must then submit their answer either by clicking "Submit" or typing the "return" (or "enter") key on the keyboard.</td>
+			 </tr>
+				<tr>
+					<td class="title">Time limit: </td>
+					<td>6 minutes per game. The timer starts counting as soon as the next page loads, and does not pause between questions. </td>
+				</tr>
+				<tr>
+					<td class="title">Question format: </td>
+					<td>Multiple choice.</td>
+				</tr>
+				<tr>
+					<td class="title">Ending the game: </td>
+					<td>The match will end after 6 minutes have passed, or after you've exhausted our question database. Clicking on one of the tabs or navigating to a new window at the top of the page will end a match, but you will not receive game statistics.</td>
+				</tr>
+			</table>
+			<br/>
         </div>
         <div id="mp_rules">
         </div>

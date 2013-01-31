@@ -2,7 +2,7 @@
 	//Connect to DB
 	function connectToDB_Local(){
 	
-		if (!$con = @mysql_connect("localhost","root","root")){
+		if (!$con = @mysql_connect("localhost","","")){
 			die('Could not connect: ' . mysql_error());
 		}
 		if (!@mysql_select_db('jesslin+ocean')){
@@ -12,7 +12,7 @@
 	
 	function connectToDB_Scripts(){
 		//Connect to DB
-		if (!$con = @mysql_connect("sql.mit.edu","jesslin","vob36cab")){
+		if (!$con = @mysql_connect("sql.mit.edu","","")){
 			die('Could not connect: ' . mysql_error());
 		}
 		if (!@mysql_select_db('jesslin+ocean')){
@@ -21,7 +21,7 @@
 	}
 	
 	function connectToDB_SG(){
-		if (!$con = @mysql_connect("localhost","osm_manager","utoa8let")){
+		if (!$con = @mysql_connect("localhost","","")){
 			die('Could not connect: ' . mysql_error());
 		}
 		if (!@mysql_select_db('osm_multichoice')){
