@@ -116,7 +116,7 @@ function get_player_total($name) {
 //Connect to DB
 function connectToDB_Local(){
 
-  if (!$con = @mysql_connect("localhost","","")){
+  if (!$con = @mysql_connect("localhost","[ENTER USERNAME]","[ENTER PASSWORD]")){
     die('Could not connect: ' . mysql_error());
   }
   if (!@mysql_select_db('jesslin+ocean')){
@@ -126,7 +126,7 @@ function connectToDB_Local(){
 
 function connectToDB_Scripts(){
   //Connect to DB
-  if (!$con = @mysql_connect("sql.mit.edu","","")){
+  if (!$con = @mysql_connect("sql.mit.edu","[ENTER USERNAME]","[ENTER PASSWORD]")){
     die('Could not connect: ' . mysql_error());
   }
   if (!@mysql_select_db('jesslin+ocean')){
@@ -134,9 +134,9 @@ function connectToDB_Scripts(){
   }
 }
 
-//probably can delete above functions -- just add user and pass below...
+//THIS ONE WORKS -- PROBABLY DELETE OPTION OF OTHERS IN FUTURE
 function connectToDB_SG(){
-  if (!$con = @mysql_connect("localhost","","")){
+  if (!$con = @mysql_connect("localhost","[ENTER USERNAME]","[ENTER PASSWORD]")){
     die('Could not connect: ' . mysql_error());
   }
   if (!@mysql_select_db('osm_multichoice')){
