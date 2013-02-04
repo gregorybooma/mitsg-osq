@@ -4,6 +4,8 @@
 	ini_set('display_errors',1);
 	error_reporting(E_ALL);
 
+require("dbConnect.php");
+
 //connectToDB_Local();
 	connectToDB_SG(); //use this 
 	$allQuestions = fetch_all_questions();
@@ -85,34 +87,4 @@
 		"question_id" => $result["PrimaryKey"]);
 	}	
 	
-	//Connect to DB
-	function connectToDB_Local(){
-	
-		if (!$con = @mysql_connect("localhost","[ENTER USERNAME]","[ENTER PASSWORD]")){
-			die('Could not connect: ' . mysql_error());
-		}
-		if (!@mysql_select_db('jesslin+ocean')){
-			die('Could not connect: ' . mysql_error());
-		}
-	}
-	
-	function connectToDB_Scripts(){
-		//Connect to DB
-		if (!$con = @mysql_connect("sql.mit.edu","[ENTER USERNAME]","[ENTER PASSWORD]")){
-			die('Could not connect: ' . mysql_error());
-		}
-		if (!@mysql_select_db('jesslin+ocean')){
-			die('Could not connect: ' . mysql_error());
-		}
-	}
-	
-	// THIS ONE WORKS -- PROBABLY DELETE OTHERS AS OPTIONS IN FUTURE
-	function connectToDB_SG(){
-		if (!$con = @mysql_connect("localhost","[ENTER USERNAME]","[ENTER PASSWORD]")){
-			die('Could not connect: ' . mysql_error());
-		}
-		if (!@mysql_select_db('osm_multichoice')){
-			die('Could not connect: ' . mysql_error());
-		}
-	}
 ?>

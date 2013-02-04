@@ -8,6 +8,8 @@ session_start();
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
+require("dbConnect.php");
+
 // connectToDB_Local(); //
 connectToDB_SG();
 $allQuestions = build_questions_array();
@@ -114,34 +116,5 @@ function get_player_total($name) {
                       GROUP BY name");
 }
 
-//Connect to DB
-function connectToDB_Local(){
 
-  if (!$con = @mysql_connect("localhost","[ENTER USERNAME]","[ENTER PASSWORD]")){
-    die('Could not connect: ' . mysql_error());
-  }
-  if (!@mysql_select_db('jesslin+ocean')){
-    die('Could not connect: ' . mysql_error());
-  }
-}
-
-function connectToDB_Scripts(){
-  //Connect to DB
-  if (!$con = @mysql_connect("sql.mit.edu","[ENTER USERNAME]","[ENTER PASSWORD]")){
-    die('Could not connect: ' . mysql_error());
-  }
-  if (!@mysql_select_db('jesslin+ocean')){
-    die('Could not connect: ' . mysql_error());
-  }
-}
-
-//THIS ONE WORKS -- PROBABLY DELETE OPTION OF OTHERS IN FUTURE
-function connectToDB_SG(){
-  if (!$con = @mysql_connect("localhost","[ENTER USERNAME]","[ENTER PASSWORD]")){
-    die('Could not connect: ' . mysql_error());
-  }
-  if (!@mysql_select_db('osm_multichoice')){
-    die('Could not connect: ' . mysql_error());
-  }
-}
 ?>
