@@ -12,7 +12,8 @@ error_reporting(E_ALL);
 connectToDB_SG();
 $allQuestions = build_questions_array();
 $response = json_encode($allQuestions);
-$response = utf8_encode($response);
+	// REINSTATE THE LINE BELOW IF NULL QUESTION PROBLEM PERSISTS
+// $response = utf8_encode($response);
 echo $response;
 
 

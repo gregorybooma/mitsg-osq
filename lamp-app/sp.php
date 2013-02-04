@@ -10,7 +10,8 @@
 	//$allQuestions = array_map("htmlentities",$allQuestions);
 	$response = implode("<QUESTION>",$allQuestions);
 	//$response = str_replace(array("&lt;QUESTION_ITEM&gt;","&lt;ANSWER&gt;"),array("<QUESTION_ITEM>","<ANSWER>"), $response);
-	$response = utf8_encode($response);
+	// REINSTATE THE LINE BELOW IF NULL QUESTION PROBLEM PERSISTS
+	// $response = utf8_encode($response); 
 	echo $response;
 	mysql_close();
 	
