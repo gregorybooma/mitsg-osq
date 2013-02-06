@@ -13,6 +13,7 @@ if (!isset($_POST['name']) || !isset($_POST['score'])) {
 
 require("questionsJson.php");
 require("dbConnect.php"); // added this after creating a separate db connect script -- delete if not necessary
+connectToDB_SG(); // same with this
 submit_score($_POST['name'], $_POST['score']);
   
 ?>
