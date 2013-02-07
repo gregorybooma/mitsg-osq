@@ -3,7 +3,8 @@
 // Intended to replace the awkward proprietary format in sp.php
 // with JSON
 
-session_start();
+//session_start();
+if(!isset($_SESSION)) { session_start(); }
 
 ini_set('display_errors',1);
 error_reporting(E_ALL);
@@ -14,8 +15,7 @@ require("dbConnect.php");
 connectToDB_SG();
 $allQuestions = build_questions_array();
 $response = json_encode($allQuestions);
-	// REINSTATE THE LINE BELOW IF NULL QUESTION PROBLEM PERSISTS
-// $response = utf8_encode($response);
+$response = utf8_encode($response);
 echo $response;
 
 
