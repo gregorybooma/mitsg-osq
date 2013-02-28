@@ -7,7 +7,7 @@
       $_SESSION['userName'] = $_POST['userName'];
     }
     else {
-      echo "User name can only contain letters and numbers.";
+      echo "User name must be an undivided character string (no spaces), and can only contain letters and numbers.";
     }
     
     header("Location: online.php");
