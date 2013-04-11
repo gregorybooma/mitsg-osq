@@ -28,7 +28,7 @@
 	<center><img src="pics/NOSB_old.jpg" alt="NOSB logo background"/></center>
 		<ul id="navbar">
     	<li class="current"><a href="index.php"><span>Play</span></a></li>
-    	<li><a href="submitQ.php"><span>Write Questions</span></a></li>
+    	<li><a href="submitQ.php"><span>Add Questions</span></a></li>
     	<!-- <li><a href="contest.html"><span>Contest</span></a></li> -->
     	<li><a href="about.html"><span>About</span></a></li>
       	<li><a href="rules.html"><span>Rules</span></a></li>
@@ -58,7 +58,7 @@
             <li id='2'> <input type='radio' name='answer' value='2' /></li><br/>
             <li id='3'> <input type='radio' name='answer' value='3'/></li>
         </ul></div><br/>
-        <button type="button" id="submitAnswer" class="submitBut" value="Submit">Submit</button>
+        <button type="button" id="submitAnswer" class="submitBut" value="Submit">Enter/Return</button>
         <button type="button" id="nextQuestion" class="submitBut" value="Next Question">Next Question</button>
 </div>
 <!--End Column1 --> 
@@ -69,9 +69,9 @@
     <button type="button" id="continue" class="gameControls">Continue</button>
 	<p/><button type="button" id="endGame" class="gameControls">End Game</button>
     <br/>
-    <h3 class="stats">Stats</h3>
-    <h4 id="correct" class="stats">Correct: </h4>
-    <h4 id="wrong" class="stats">Wrong: </h4>
+    <h3 class="stats" style="color:black">Stats</h3>
+    <h4 id="correct" style="color:black" class="stats">Correct: </h4>
+    <h4 id="wrong" style="color:black" class="stats">Wrong: </h4>
     <h4 id="pauseMessage">Game Paused</h4><!--End Column2--></div>
 
 <!--<div id="footer">

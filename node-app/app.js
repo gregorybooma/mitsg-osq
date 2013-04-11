@@ -35,14 +35,17 @@ io.sockets.on('connection', function(socket) {
     socket: socket
   });
 
-  // Player sent their user name for leader board
+  // Player sent their user name for leader board and game stats
   socket.on("registerName", function(data) {
     var game = gamesBySocketId[this.id];
     if (this.id === game.p1.socket.id) {
       game.p1.name = data.name;
+      game.p1.socket.emit("initScoreSpace", {playerName: game.p1.name});
     }
     else {
       game.p2.name = data.name;
+      game.p2.socket.emit("initScoreSpace", {playerName: game.p2.name, opponentName: game.p1.name});
+      game.p1.socket.emit("initScoreSpace", {opponentName: game.p2.name});
     }
   });
 
@@ -120,12 +123,16 @@ io.sockets.on('connection', function(socket) {
 
     // Update scores for both players
     game.p1.socket.emit("updateScore", {
+      playerName: game.p1.name,
+      opponentName: game.p2.name,
       playerCorrect: game.p1.correct,
       playerWrong: game.p1.wrong,
       opponentCorrect: game.p2.correct,
       opponentWrong: game.p2.wrong
     });
     game.p2.socket.emit("updateScore", {
+      playerName: game.p2.name,
+      opponentName: game.p1.name,
       playerCorrect: game.p2.correct,
       playerWrong: game.p2.wrong,
       opponentCorrect: game.p1.correct,
@@ -165,14 +172,15 @@ setInterval(function() {
     gamesBySocketId[p2.socket.id] = game;
     p1.socket.emit("beginGame", {});
     p2.socket.emit("beginGame", {});
-    var score = {
-      playerCorrect: 0,
-      playerWrong: 0,
-      opponentCorrect: 0,
-      opponentWrong: 0
-    };
-    p1.socket.emit("updateScore", score);
-    p2.socket.emit("updateScore", score);
+    //Doing score/name initialization with initScoreSpace. If all ok, clean-up the following:
+    //var score = {
+      //playerCorrect: 0,
+      //playerWrong: 0,
+      //opponentCorrect: 0,
+      //opponentWrong: 0
+    //};
+    //p1.socket.emit("updateScore", score);
+    //p2.socket.emit("updateScore", score);
   }
 
   // Update all ongoing games

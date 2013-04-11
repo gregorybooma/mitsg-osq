@@ -24,11 +24,12 @@
   <script type="text/javascript" src="jquery-1.5.min.js"></script>
   <script type="text/javascript" src="socket.io.js"></script>
   <script type="text/javascript" src="keyDecode.js"></script>
-  <script type="text/javascript" src="online.js"></script>
+  <!-- $NODE_PATH and $_SESSION['userName'] must be set before calling online.js! -->
   <script>
     window.nodePath = "<?= $NODE_PATH ?>";
     window.userName = "<?= $_SESSION['userName'] ?>";
   </script>
+  <script type="text/javascript" src="online.js"></script>
 </head>
 
 <body>
@@ -38,7 +39,7 @@
   <center><img src="pics/NOSB_old.jpg" alt="NOSB logo background"/></center>
     <ul id="navbar">
       <li class="current"><a href="index.php"><span>Play</span></a></li>
-      <li><a href="submitQ.php"><span>Write Questions</span></a></li>
+      <li><a href="submitQ.php"><span>Add Questions</span></a></li>
       <!-- <li><a href="contest.html"><span>Contest</span></a></li> -->
       <li><a href="about.html"><span>About</span></a></li>
         <li><a href="rules.html"><span>Rules</span></a></li>

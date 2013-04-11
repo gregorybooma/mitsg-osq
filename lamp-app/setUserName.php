@@ -7,7 +7,7 @@
       $_SESSION['userName'] = $_POST['userName'];
     }
     else {
-      echo "User name must be an undivided character string (no spaces), and can only contain letters and numbers.";
+      echo "User name must be an undivided character string (no spaces), and can only contain letters and numbers. Mixed-case names are permitted.";
     }
     
     header("Location: online.php");
@@ -35,7 +35,9 @@
     <form method="post" action="setUserName.php">
       <fieldset>
         <legend>Your name is needed for the public leaderboard</legend>
-        <p>Enter a screen name to identify yourself on the leaderboard. Leaders are ranked by cumulative daily score. Results are shown at the end of each game.<p>
+        <p>Enter a screen name to identify yourself on the public leaderboard. Your screen name is analagous to a social media handle, or username portion of an email address. Choose a nickname for yourself or, in the case of team play, one for your school. Names must be an undivided character string (no spaces) of letters and numbers only. Mixed-case names are permitted.<p>
+        <p>Once you have submitted your screen name, you will be taken to a players "lobby". If there is at least one other player waiting there, you will be paired with an opponent automatically, and the game will start. If there are no other players in lobby, a "Waiting for opponent..." messsage is displayed until an opponent arrives and the game begins.<p>
+        <p>The historical leader board is displayed with the post-game summary that follows the timed quiz. It lists the screen names of players having the most correct answers in one day.<p>
         <input name="userName" id="userName" pattern="^\w+$" value="<?= $userName ?>">
         <label for="userName">Your Name</label>
         <br>

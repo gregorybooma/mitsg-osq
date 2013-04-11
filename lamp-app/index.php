@@ -22,7 +22,7 @@
     <center><a href="http://nosb.org" target="blank"><img src="pics/NOSB_old.jpg" alt="NOSB logo background"/></a><br/></center>
         <ul id="navbar">
         <li class="current"><a href="index.php"><span>Play</span></a></li>
-        <li><a href="submitQ.php"><span>Write Questions</span></a></li>
+        <li><a href="submitQ.php"><span>Add Questions</span></a></li>
         <!-- <li><a href="contest.html"><span>Contest</span></a></li> -->
         <li><a href="about.html"><span>About</span></a></li>
         <li><a href="rules.html"><span>Rules</span></a></li>
@@ -87,7 +87,7 @@
 			<br/>
 	
 			<h3>Two-player Online Mode</h3>
-			<p>The Two-player Online mode allows you to play against an opponent via the internet. Currently, you cannot choose your opponent. Competitors are matched on a first-come, first-served basis.</p>
+			<p>The Two-player Online mode allows you to play against an opponent across the internet. Currently, players do not choose thier opponents, but are matched on a first-come, first-served basis. After users enter a screen name to identify themselves or their team, they are forwarded to a "lobby". If there is at least one other player waiting there, players are automatically matched and the game will begin. If there are no other players in lobby, a "Waiting for opponent..." messsage is displayed until an opponent arrives and the game begins. If two teams wish to compete in a scrimmage, it is recommended that they arrange a particular time to do so.</p>
 			<table>
 			 <tr>
 					<td class="title">Two-player Online Controls: </td>
@@ -131,7 +131,8 @@
         <input id="displayRules" class="button2" type="button2" value="Display Rules"/>
         <p/>
         <input id="start" class="button" type="submit" value="Start Game" />
-        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="contest.html"><img src="http://seagrant.mit.edu/osm/lamp-app/pics/cutfish.png" alt="contest message"/></a>
+        For best results, use Mozilla Firefox, Google Chrome, or Safari.
+        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--<a href="contest.html">--><img src="./pics/cutfish.png" alt="drawing of a cuttlefish"/><!--</a>-->
     </div>
 
     <div id="rightCol">
@@ -163,7 +164,8 @@
 
 <!--end Main div--></div>
 <div id="popup"></div>
-<!--<div id="footer">For best results, use Mozilla Firefox, Google Chrome, or Safari.</div> -->
+<!--<div id="footer">For best results, use Mozilla Firefox, Google Chrome, or Safari.</div>-->
 <!--end Wrapper div--></div>
+
 </body>
 </html>

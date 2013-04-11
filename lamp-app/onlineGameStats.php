@@ -23,7 +23,7 @@
   <center><img src="pics/NOSB_old.jpg" alt="NOSB logo background"/><br/></center>
   <ul id="navbar">
       <li><a href="index.php"><span>Play</span></a></li>
-      <li><a href="submitQ.php"><span>Write Questions</span></a></li>
+      <li><a href="submitQ.php"><span>Add Questions</span></a></li>
       <!-- <li><a href="contest.html"><span>Contest</span></a></li> -->
       <li><a href="about.html"><span>About</span></a></li>
         <li><a href="rules.html"><span>Rules</span></a></li>
@@ -51,7 +51,7 @@
       <td><h4 class="alignM">Avg. Response Time<br>(when correct)</h4></td>
     </tr>
     <tr>
-      <td><h4>You</h4></td>
+      <td><h4><?php if (isset($_GET["playerName"])) { echo $_GET["playerName"]; } else { echo 'You'; } ?><!--set back to no php You if screwed-up--></h4></td>
       <td style="text-align:center"><p id="elapsed" class="statTable"><?= htmlspecialchars($_GET["playerTime"]) ?></p></td>
       <td style="text-align:center"><p id="numQs" class="statTable"><?= htmlspecialchars($_GET["playerQuestions"]) ?></p></td>
       <td style="text-align:center"><p id="numCorrect" class="statTable"><?= htmlspecialchars($_GET["playerCorrect"]) ?></p></td>
@@ -60,7 +60,7 @@
       <td style="text-align:center"><p id="aveRespT" class="statTable"><?= htmlspecialchars($_GET["playerAve"]) ?></p></td>
     </tr>
     <tr>
-      <td><h4>Your Opponent</h4></td>
+      <td><h4><?php if (isset($_GET["opponentName"])) { echo $_GET["opponentName"]; } else { echo 'Your Opponent'; } ?></h4></td>
       <td style="text-align:center"><p id="elapsedP2" class="statTable"><?= htmlspecialchars($_GET["opponentTime"]) ?></p></td>
       <td style="text-align:center"><p id="numQsP2" class="statTable"><?= htmlspecialchars($_GET["opponentQuestions"]) ?></p></td>
       <td style="text-align:center"><p id="numCorrectP2" class="statTable"><?= htmlspecialchars($_GET["opponentCorrect"]) ?></p></td>

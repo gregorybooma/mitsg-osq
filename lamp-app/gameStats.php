@@ -49,7 +49,7 @@
 	<center><img src="pics/NOSB_old.jpg" alt="NOSB logo background"/><br/></center>
 	<ul id="navbar">
     	<li><a href="index.php"><span>Play</span></a></li>
-    	<li><a href="submitQ.php"><span>Write Questions</span></a></li>
+    	<li><a href="submitQ.php"><span>Add Questions</span></a></li>
     	<!-- <li><a href="contest.html"><span>Contest</span></a></li> -->
     	<li><a href="about.html"><span>About</span></a></li>
       	<li><a href="rules.html"><span>Rules</span></a></li>
@@ -76,7 +76,7 @@
 			<td><h4 class="alignM">Avg. Response Time</h4></td>
 		</tr>
 		<tr>
-			<td><h4>Player 1</h4></td>
+			<td><h4><?php if (isset($_SESSION['userName'])) { echo $_SESSION['userName']; } else { echo 'Player 1'; } ?><!--set back to no php Player 1 if screwed-up--></h4></td>
 			<td style="text-align:center"><p id="elapsed" class="statTable">(time elapsed)</p></td>
 			<td style="text-align:center"><p id="numQs" class="statTable">(number of questions)</p></td>
 			<td style="text-align:center"><p id="numCorrect" class="statTable">(number of correct)</p></td>

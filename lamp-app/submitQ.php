@@ -31,7 +31,7 @@ $(document).ready(function(){
 	<center><img src="pics/NOSB_old.jpg" alt="NOSB logo background"/><br/></center>
 	<ul id="navbar">
     	<li><a href="index.php"><span>Play</span></a></li>
-    	<li class="current"><a href="submitQ.php"><span>Write Questions</span></a></li>
+    	<li class="current"><a href="submitQ.php"><span>Add Questions</span></a></li>
     	<!-- <li><a href="contest.html"><span>Contest</span></a></li> -->
     	<li><a href="about.html"><span>About</span></a></li>
       	<li><a href="rules.html"><span>Rules</span></a></li>
@@ -68,7 +68,7 @@ $(document).ready(function(){
             	<td class="text">Email:</td> 
                 <td class="border"><input type="text" name="email" id="email" size="50" /></td>
             </tr>
-              <tr>
+              <!--<tr>
             	<td class="text">Your Grade Level:</td> 
                 <td>
                     <select name="grade" id="grade">
@@ -80,10 +80,10 @@ $(document).ready(function(){
                       	<option value="Professional">Professional</option>
                     </select>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
             	<td class="text">School Name:</td>
-                <td class="border"><input type="text" name="schoolname" id="schoolname" size="50" /></td>
+                <td class="border"><input type="text" name="schoolname" id="schoolname" value="Not Applicable" size="50" /></td>
             </tr>
             <tr>
             	<td class="text">NOSB region:</td> 

@@ -1,5 +1,9 @@
 // JavaScript Document
 
+//initialize for viewing player names
+window['playerName'] = "";
+window['opponentName'] = "";
+
 $(document).ready(function() {
 	$('#hiddenForm').hide();
 
@@ -76,7 +80,9 @@ $(document).ready(function() {
       theirAnswersArr.push(theirAnswers[id] || -1);
     }
 		window.location = "onlineGameStats.php" +
-											"?playerTime=" + gameTime +
+											"?playerName=" + window.playerName +
+											"&opponentName=" + window.opponentName +
+											"&playerTime=" + gameTime +
 											"&playerQuestions=" + (answeredCorrect + answeredWrong) +
 		                  "&playerCorrect=" + answeredCorrect +
 		                  "&playerWrong=" + answeredWrong +
@@ -134,6 +140,19 @@ $(document).ready(function() {
 	});
 
 	// Socket IO code
+
+  socket.on('initScoreSpace', function(data) {
+    for (var key in data) {
+    	window[key] = data[key];
+    	//try if key == opponentName then initialize the score here
+    	if (key == 'opponentName') {
+			$("#playerCorrect").text(window.playerName + " Correct: 0");
+			$("#playerWrong").text(window.playerName + " Wrong: 0");
+			$("#opponentCorrect").text(window.opponentName + " Correct: 0");
+			$("#opponentWrong").text(window.opponentName + " Wrong: 0");
+    	}
+    }
+  });
 
   socket.on('beginGame', function(data) {
     $("#lobby").hide();
@@ -222,10 +241,10 @@ $(document).ready(function() {
   });
 
   socket.on('updateScore', function(data) {
-    $("#playerCorrect").text("Player Correct: " + data.playerCorrect);
-    $("#playerWrong").text("Player Wrong: " + data.playerWrong);
-    $("#opponentCorrect").text("Opponent Correct: " + data.opponentCorrect);
-    $("#opponentWrong").text("Opponent Wrong: " + data.opponentWrong);
+    $("#playerCorrect").text(window.playerName + " Correct: " + data.playerCorrect);
+    $("#playerWrong").text(window.playerName + " Wrong: " + data.playerWrong);
+    $("#opponentCorrect").text(window.opponentName + " Correct: " + data.opponentCorrect);
+    $("#opponentWrong").text(window.opponentName + " Wrong: " + data.opponentWrong);
   });
 
   socket.on("pulse", function(data) {
