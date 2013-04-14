@@ -102,11 +102,11 @@
   <h3 id="timer"></h3>
   <h3 id="questionTimer"></h3>
   <p/>
-    <h3 class="stats">Stats</h3>
-    <h4 id="playerCorrect" class="stats"></h4>
-    <h4 id="playerWrong" class="stats"></h4>
-    <h4 id="opponentCorrect" class="stats"></h4>
-    <h4 id="opponentWrong" class="stats"></h4>
+    <h3 class="stats" style="color:black">Stats</h3>
+    <h4 id="playerCorrect" class="stats" style="color:black"></h4>
+    <h4 id="playerWrong" class="stats" style="color:black"></h4>
+    <h4 id="opponentCorrect" class="stats" style="color:black"></h4>
+    <h4 id="opponentWrong" class="stats" style="color:black"></h4>
     <!--End Column2--></div>
 
 <!--<div id="footer">
