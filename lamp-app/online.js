@@ -1,8 +1,9 @@
 // JavaScript Document
 
 //initialize for viewing player names
-window['playerName'] = "";
-window['opponentName'] = "";
+// setting playerName and opponentName in online.php now. delete next lines if it works...
+//window['playerName'] = "";
+//window['opponentName'] = "";
 
 $(document).ready(function() {
 	$('#hiddenForm').hide();
@@ -155,11 +156,11 @@ $(document).ready(function() {
   });
 
   socket.on('beginGame', function(data) {
+    socket.emit("registerName", {name: window.userName});
     $("#lobby").hide();
     $("#gamespace").show();
     $("#buzzer").show();
     $("#buzzer-label").text("Press Q to buzz in and answer!");
-    socket.emit("registerName", {name: window.userName});
   });
 
   socket.on('buzzed', function(data) {

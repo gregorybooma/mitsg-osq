@@ -2,7 +2,7 @@
   require "config.php";
   session_start();
 
-  if(!isset($_SESSION['userName'])){
+  if(!isset($_SESSION['userName']) || empty($_SESSION['userName'])){
     header("Location: setUserName.php");
   }
 
@@ -27,7 +27,9 @@
   <!-- $NODE_PATH and $_SESSION['userName'] must be set before calling online.js! -->
   <script>
     window.nodePath = "<?= $NODE_PATH ?>";
-    window.userName = "<?= $_SESSION['userName'] ?>";
+    window.userName = window.playerName = "<?= $_SESSION['userName'] ?>";
+    window['opponentName'] = "";
+
   </script>
   <script type="text/javascript" src="online.js"></script>
 </head>
