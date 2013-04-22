@@ -28,7 +28,6 @@
   <script>
     window.nodePath = "<?= $NODE_PATH ?>";
     window.userName = window.playerName = "<?= $_SESSION['userName'] ?>";
-    window['opponentName'] = "";
 
   </script>
   <script type="text/javascript" src="online.js"></script>
@@ -91,7 +90,7 @@
               <li id='3'> <input type='radio' name='answer' value='3'/></li>
           </ul>
           </div><br/>
-          <input type="submit" id="submitAnswer" value="Submit">
+          <input type="submit" id="submitAnswer" value="Enter/Return">
           <button id="pass">Pass</button>
           <button id="buzzer">Buzz in to answer</button>
         </form>

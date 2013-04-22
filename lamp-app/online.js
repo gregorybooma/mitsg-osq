@@ -1,10 +1,5 @@
 // JavaScript Document
 
-//initialize for viewing player names
-// setting playerName and opponentName in online.php now. delete next lines if it works...
-//window['playerName'] = "";
-//window['opponentName'] = "";
-
 $(document).ready(function() {
 	$('#hiddenForm').hide();
 
@@ -145,13 +140,10 @@ $(document).ready(function() {
   socket.on('initScoreSpace', function(data) {
     for (var key in data) {
     	window[key] = data[key];
-    	//try if key == opponentName then initialize the score here
-    	if (key == 'opponentName') {
-			$("#playerCorrect").text(window.playerName + " Correct: 0");
-			$("#playerWrong").text(window.playerName + " Wrong: 0");
-			$("#opponentCorrect").text(window.opponentName + " Correct: 0");
-			$("#opponentWrong").text(window.opponentName + " Wrong: 0");
-    	}
+			$("#playerCorrect").text(data.playerName + " Correct: 0");
+			$("#playerWrong").text(data.playerName + " Wrong: 0");
+			$("#opponentCorrect").text(data.opponentName + " Correct: 0");
+			$("#opponentWrong").text(data.opponentName + " Wrong: 0");
     }
   });
 
@@ -242,10 +234,10 @@ $(document).ready(function() {
   });
 
   socket.on('updateScore', function(data) {
-    $("#playerCorrect").text(window.playerName + " Correct: " + data.playerCorrect);
-    $("#playerWrong").text(window.playerName + " Wrong: " + data.playerWrong);
-    $("#opponentCorrect").text(window.opponentName + " Correct: " + data.opponentCorrect);
-    $("#opponentWrong").text(window.opponentName + " Wrong: " + data.opponentWrong);
+    $("#playerCorrect").text(data.playerName + " Correct: " + data.playerCorrect);
+    $("#playerWrong").text(data.playerName + " Wrong: " + data.playerWrong);
+    $("#opponentCorrect").text(data.opponentName + " Correct: " + data.opponentCorrect);
+    $("#opponentWrong").text(data.opponentName + " Wrong: " + data.opponentWrong);
   });
 
   socket.on("pulse", function(data) {

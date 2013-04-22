@@ -40,12 +40,13 @@ io.sockets.on('connection', function(socket) {
     var game = gamesBySocketId[this.id];
     if (this.id === game.p1.socket.id) {
       game.p1.name = data.name;
-      game.p1.socket.emit("initScoreSpace", {playerName: game.p1.name});
     }
     else {
       game.p2.name = data.name;
+    }
+    if (game.p2.name && game.p2.name) {
+      game.p1.socket.emit("initScoreSpace", {playerName: game.p1.name, opponentName: game.p2.name});
       game.p2.socket.emit("initScoreSpace", {playerName: game.p2.name, opponentName: game.p1.name});
-      game.p1.socket.emit("initScoreSpace", {opponentName: game.p2.name});
     }
   });
 

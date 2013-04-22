@@ -87,7 +87,7 @@
 			<br/>
 	
 			<h3>Two-player Online Mode</h3>
-			<p>The Two-player Online mode allows you to play against an opponent across the internet. Currently, players do not choose thier opponents, but are matched on a first-come, first-served basis. After users enter a screen name to identify themselves or their team, they are forwarded to a "lobby". If there is at least one other player waiting there, players are automatically matched and the game will begin. If there are no other players in lobby, a "Waiting for opponent..." messsage is displayed until an opponent arrives and the game begins. If two teams wish to compete in a scrimmage, it is recommended that they arrange a particular time to do so.</p>
+			<p>The Two-player Online mode allows you to play against an opponent across the internet. Currently, players do not choose their opponents, but are matched on a first-come, first-served basis. After users enter a screen name to identify themselves or their team, they are forwarded to a "lobby". If there is at least one other player waiting there, players are automatically matched and the game will begin. If there are no other players in lobby, a "Waiting for opponent..." messsage is displayed until an opponent arrives and the game begins. If two teams wish to compete in a scrimmage, it is recommended that they arrange a particular time to do so.</p>
 			<table>
 			 <tr>
 					<td class="title">Two-player Online Controls: </td>
