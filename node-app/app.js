@@ -44,7 +44,7 @@ io.sockets.on('connection', function(socket) {
     else {
       game.p2.name = data.name;
     }
-    if (game.p2.name && game.p2.name) {
+    if (game.p1.name && game.p2.name) {
       game.p1.socket.emit("initScoreSpace", {playerName: game.p1.name, opponentName: game.p2.name});
       game.p2.socket.emit("initScoreSpace", {playerName: game.p2.name, opponentName: game.p1.name});
     }
