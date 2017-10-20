@@ -1,3 +1,8 @@
+## mitsg-osq
+Web-based [ocean sciences quiz game](http://osq.nosb.org/) allowing for multi-player competition across the internet. Core development of multi-player was done for MIT Sea Grant by Gregory Smith of Bocoup in Boston, with additional development and bug fixes by Gregory Booma of MIT Sea Grant. Single-player mode was originally developed by Rachel VanCott and Jessica Lin at MIT Sea Grant.
+
+Here is the original README:
+
 mit-quiz
 ========
 
